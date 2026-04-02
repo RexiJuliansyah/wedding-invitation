@@ -9,9 +9,13 @@ export default function OpeningScreen({ guestName, onOpen }) {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, y: '-100%' }}
       transition={{ duration: 1.2, ease: [0.83, 0, 0.39, 1] }}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-cover bg-fixed bg-center text-center overflow-hidden"
-      style={{ backgroundImage: `url(${bgTexture})` }}
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center text-center overflow-hidden"
     >
+      {/* Fixed Background Layer for Opening Screen */}
+      <div 
+        className="absolute inset-0 z-[-1] bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${bgTexture})` }}
+      />
 
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
