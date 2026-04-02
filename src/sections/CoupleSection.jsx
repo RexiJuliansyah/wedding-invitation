@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Camera } from 'lucide-react';
 import brideImg from '../assets/bride.jpeg';
 import groomImg from '../assets/groom.jpeg';
 
