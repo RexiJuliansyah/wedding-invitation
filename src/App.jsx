@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import OpeningScreen from './sections/OpeningScreen';
 import HeroSection from './sections/HeroSection';
+import PrayerSection from './sections/PrayerSection';
 import CoupleSection from './sections/CoupleSection';
 import EventDetails from './sections/EventDetails';
 import CountdownSection from './sections/CountdownSection';
@@ -41,6 +42,7 @@ export default function App() {
           <MusicPlayer />
           <div className="relative z-0">
             <HeroSection />
+            <PrayerSection />
             <CoupleSection />
             <EventDetails />
             <CountdownSection />
