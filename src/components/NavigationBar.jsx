@@ -16,7 +16,7 @@ export default function NavigationBar() {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: '-50% 0px -50% 0px',
+      rootMargin: '-25% 0px -25% 0px',
       threshold: 0
     };
 
@@ -38,6 +38,10 @@ export default function NavigationBar() {
     return () => observer.disconnect();
   }, []);
 
+  const handleNavClick = (id) => {
+    setActiveSegment(id);
+  };
+
   return (
     <div className="fixed bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 w-full md:w-auto z-50 px-4 md:px-0">
       <div className="bg-cream/95 backdrop-blur-md shadow-[0_-4px_25px_rgba(0,0,0,0.1)] md:shadow-2xl rounded-full px-6 md:px-10 py-3 flex items-center justify-between gap-6 md:gap-10 border border-brown-soft/20 max-w-lg mx-auto md:max-w-none">
@@ -49,6 +53,7 @@ export default function NavigationBar() {
             <a
               key={item.id}
               href={`#${item.id}`}
+              onClick={() => handleNavClick(item.id)}
               className={`flex flex-col items-center justify-center transition-all duration-300 relative group ${isActive
                   ? 'text-brown-dark scale-110'
                   : 'text-brown-dark/30 hover:text-brown-dark/60'

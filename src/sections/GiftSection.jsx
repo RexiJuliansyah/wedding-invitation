@@ -50,7 +50,7 @@ export default function GiftSection() {
         <motion.div variants={itemVariants} className="mb-12">
           <Gift className="w-10 h-10 mx-auto text-brown-soft mb-4" />
           <h2 className="text-4xl md:text-5xl font-serif text-brown-dark mb-4">Kado Digital</h2>
-          <p className="text-brown-soft max-w-lg mx-auto">
+          <p className="text-brown-dark max-w-lg mx-auto">
             Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika Anda ingin memberikan tanda kasih, Anda dapat memberikannya melalui:
           </p>
         </motion.div>
@@ -64,7 +64,7 @@ export default function GiftSection() {
             >
               <div className="text-left">
                 <div className="flex justify-between items-start mb-6">
-                  <span className="text-2xl font-bold text-brown-dark/20 italic">{account.bankName}</span>
+                  <span className="text-2xl font-bold text-brown-dark italic">{account.bankName}</span>
                   <span className="text-2xl">{account.icon}</span>
                 </div>
 
@@ -113,7 +113,7 @@ export default function GiftSection() {
           ))}
         </div>
 
-        <motion.div variants={itemVariants} className="glass-panel p-8 md:p-12 max-w-2xl mx-auto">
+        {/* <motion.div variants={itemVariants} className="glass-panel p-8 md:p-12 max-w-2xl mx-auto">
           <div className="flex flex-col items-center gap-4">
             <MapPin className="w-8 h-8 text-brown-soft" />
             <div>
@@ -131,7 +131,7 @@ export default function GiftSection() {
               </button>
             </div>
           </div>
-        </motion.div>
+        </motion.div> */}
       </motion.div>
     </section>
   );

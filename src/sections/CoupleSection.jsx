@@ -49,7 +49,7 @@ export default function CoupleSection() {
 
         <div className="grid md:grid-cols-2 gap-12 md:gap-24 relative">
           {/* Divider visible only on desktop */}
-          <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl font-serif text-brown-soft opacity-30 italic">
+          <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl font-serif font-bold text-brown-dark opacity-70 italic">
             &
           </div>
 
@@ -58,15 +58,15 @@ export default function CoupleSection() {
             <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mb-6 shadow-xl border-8 border-white bg-cream">
               <img src={brideImg} alt="Bride" className="w-full h-full object-cover object-top" />
             </div>
-            <h3 className="text-3xl font-serif text-brown-dark mb-2">Juliana Kus Inggardini</h3>
-            <p className="text-sm text-brown-soft mb-4 uppercase tracking-widest">The Bride</p>
+            <h3 className="text-3xl font-serif font-bold text-brown-dark mb-2">Juliana Kus Inggardini</h3>
+            <p className="text-sm text-brown-dark mb-4 uppercase tracking-widest">The Bride</p>
             <p className="text-sm text-brown-dark/80 mb-2">Putri dari</p>
             <p className="text-sm font-medium text-brown-dark mb-6">Bapak Sugito &<br />Ibu Endang Suningsih</p>
-            <a 
-              href="https://www.instagram.com/juliainggardini" 
-              target="_blank" 
+            <a
+              href="https://www.instagram.com/juliainggardini"
+              target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center text-brown-soft hover:text-brown-dark transition-colors"
+              className="inline-flex items-center text-brown-dark/90 hover:text-brown-dark transition-colors"
             >
               <Instagram className="w-4 h-4 mr-2" />
               <span className="text-xs">@juliainggardini</span>
@@ -78,15 +78,15 @@ export default function CoupleSection() {
             <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mb-6 shadow-xl border-8 border-white bg-cream">
               <img src={groomImg} alt="Groom" className="w-full h-full object-cover object-top" />
             </div>
-            <h3 className="text-3xl font-serif text-brown-dark mb-2">Rexi Faza Juliansyah</h3>
-            <p className="text-sm text-brown-soft mb-4 uppercase tracking-widest">The Groom</p>
+            <h3 className="text-3xl font-serif font-bold text-brown-dark mb-2">Rexi Faza Juliansyah</h3>
+            <p className="text-sm text-brown-dark mb-4 uppercase tracking-widest">The Groom</p>
             <p className="text-sm text-brown-dark/80 mb-2">Putra dari</p>
             <p className="text-sm font-medium text-brown-dark mb-6">Bapak Ifdial &<br />Ibu Lindawati</p>
-            <a 
-              href="https://www.instagram.com/rexijuliansyah" 
-              target="_blank" 
+            <a
+              href="https://www.instagram.com/rexijuliansyah"
+              target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center text-brown-soft hover:text-brown-dark transition-colors"
+              className="inline-flex items-center text-brown-dark/90 hover:text-brown-dark transition-colors"
             >
               <Instagram className="w-4 h-4 mr-2" />
               <span className="text-xs">@rexijuliansyah</span>
