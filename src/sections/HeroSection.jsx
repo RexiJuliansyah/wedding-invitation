@@ -4,7 +4,7 @@ import groomImg from '../assets/groom.jpeg';
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center p-8 text-center overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center p-8 text-center overflow-hidden" id="home">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}

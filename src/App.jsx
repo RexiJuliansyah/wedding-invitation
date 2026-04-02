@@ -12,6 +12,7 @@ import RSVPSection from './sections/RSVPSection';
 import WishesSection from './sections/WishesSection';
 import ClosingSection from './sections/ClosingSection';
 import MusicPlayer from './components/MusicPlayer';
+import NavigationBar from './components/NavigationBar';
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,17 +41,18 @@ export default function App() {
       {isOpen && (
         <>
           <MusicPlayer />
-          <div className="relative z-0">
-            <HeroSection />
-            <PrayerSection />
-            <CoupleSection />
-            <EventDetails />
-            <CountdownSection />
-            {/* <StorySection /> */}
-            <GallerySection />
-            <RSVPSection />
-            <WishesSection />
-            <ClosingSection />
+          <NavigationBar />
+          <div className="relative z-0 h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory">
+            <div className="snap-start min-h-screen flex flex-col justify-center"><HeroSection /></div>
+            <div className="snap-start min-h-screen flex flex-col justify-center"><PrayerSection /></div>
+            <div className="snap-start min-h-screen flex flex-col justify-center"><CoupleSection /></div>
+            <div className="snap-start min-h-screen flex flex-col justify-center"><EventDetails /></div>
+            <div className="snap-start min-h-screen flex flex-col justify-center"><CountdownSection /></div>
+            {/* <div className="snap-start min-h-screen flex flex-col justify-center"><StorySection /></div> */}
+            <div className="snap-start min-h-screen flex flex-col justify-center"><GallerySection /></div>
+            <div className="snap-start min-h-screen flex flex-col justify-center"><RSVPSection /></div>
+            <div className="snap-start min-h-screen flex flex-col justify-center"><WishesSection /></div>
+            <div className="snap-start min-h-screen flex flex-col justify-center"><ClosingSection /></div>
           </div>
         </>
       )}
