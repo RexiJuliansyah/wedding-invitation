@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
-import { Camera } from 'lucide-react';
+import { Instagram } from 'lucide-react';
+import brideImg from '../assets/bride.jpeg';
+import groomImg from '../assets/groom.jpeg';
 
 export default function CoupleSection() {
   const containerVariants = {
@@ -35,7 +37,7 @@ export default function CoupleSection() {
           {/* Bride Profile */}
           <motion.div variants={itemVariants} className="flex flex-col items-center">
             <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mb-6 shadow-xl border-8 border-white bg-cream">
-              <img src="/src/assets/bride.jpeg" alt="Bride" className="w-full h-full object-cover" />
+              <img src={brideImg} alt="Bride" className="w-full h-full object-cover" />
             </div>
             <h3 className="text-3xl font-serif text-brown-dark mb-2">Juliana Kus Inggardini</h3>
             <p className="text-sm text-brown-soft mb-4 uppercase tracking-widest">The Bride</p>
@@ -50,7 +52,7 @@ export default function CoupleSection() {
           {/* Groom Profile */}
           <motion.div variants={itemVariants} className="flex flex-col items-center">
             <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mb-6 shadow-xl border-8 border-white bg-cream">
-              <img src="/src/assets/groom.jpeg" alt="Groom" className="w-full h-full object-cover focus:object-top" />
+              <img src={groomImg} alt="Groom" className="w-full h-full object-cover focus:object-top" />
             </div>
             <h3 className="text-3xl font-serif text-brown-dark mb-2">Rexi Faza Juliansyah</h3>
             <p className="text-sm text-brown-soft mb-4 uppercase tracking-widest">The Groom</p>

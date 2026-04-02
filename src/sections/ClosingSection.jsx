@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion';
+import bgTexture from '../assets/bg-texture.jpg';
 
 export default function ClosingSection() {
   return (
     <section className="py-24 px-6 md:px-12 text-center bg-brown-dark text-cream relative">
       <div 
         className="absolute inset-0 opacity-10 mix-blend-multiply pointer-events-none"
-        style={{ backgroundImage: "url('/src/assets/bg-texture.jpg')", backgroundSize: 'cover' }}
+        style={{ backgroundImage: `url(${bgTexture})`, backgroundSize: 'cover' }}
       ></div>
       
       <motion.div 

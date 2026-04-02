@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion';
+import brideImg from '../assets/bride.jpeg';
+import groomImg from '../assets/groom.jpeg';
 
 export default function HeroSection() {
   return (
@@ -19,14 +21,14 @@ export default function HeroSection() {
           <motion.img
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            src="/src/assets/bride.jpeg"
+            src={brideImg}
             alt="Bride"
             className="w-32 h-32 md:w-44 md:h-44 object-cover rounded-full border-4 border-cream-light shadow-md"
           />
           <motion.img
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            src="/src/assets/groom.jpeg"
+            src={groomImg}
             alt="Groom"
             className="w-32 h-32 md:w-44 md:h-44 object-cover rounded-full border-4 border-cream-light shadow-md"
           />

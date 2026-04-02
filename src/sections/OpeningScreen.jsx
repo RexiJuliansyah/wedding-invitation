@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { MailOpen } from 'lucide-react';
+import bgTexture from '../assets/bg-texture.jpg';
 
 export default function OpeningScreen({ guestName, onOpen }) {
   return (
@@ -13,7 +14,7 @@ export default function OpeningScreen({ guestName, onOpen }) {
       {/* Background Texture Overlay */}
       <div 
         className="absolute inset-0 opacity-40 mix-blend-multiply pointer-events-none"
-        style={{ backgroundImage: "url('/src/assets/bg-texture.jpg')", backgroundSize: 'cover' }}
+        style={{ backgroundImage: `url(${bgTexture})`, backgroundSize: 'cover' }}
       ></div>
 
       <motion.div 

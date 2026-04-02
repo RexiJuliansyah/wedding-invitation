@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import brideImg from '../assets/bride.jpeg';
+import groomImg from '../assets/groom.jpeg';
 
 export default function GallerySection() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   // Fallback using placeholder images since there's no real gallery images provided yet
   const images = [
-    '/src/assets/bride.jpeg',
-    '/src/assets/groom.jpeg',
-    '/src/assets/bride.jpeg',
-    '/src/assets/groom.jpeg',
-    '/src/assets/bride.jpeg',
-    '/src/assets/groom.jpeg'
+    brideImg,
+    groomImg,
+    brideImg,
+    groomImg,
+    brideImg,
+    groomImg
   ];
 
   return (
