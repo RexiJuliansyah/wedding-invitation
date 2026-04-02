@@ -4,7 +4,7 @@ import { Camera } from 'lucide-react';
 export default function CoupleSection() {
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
       transition: { staggerChildren: 0.3 }
     }
@@ -35,12 +35,12 @@ export default function CoupleSection() {
           {/* Bride Profile */}
           <motion.div variants={itemVariants} className="flex flex-col items-center">
             <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mb-6 shadow-xl border-8 border-white bg-cream">
-              <img src="/src/assets/bride.jpg" alt="Bride" className="w-full h-full object-cover" />
+              <img src="/src/assets/bride.jpeg" alt="Bride" className="w-full h-full object-cover" />
             </div>
             <h3 className="text-3xl font-serif text-brown-dark mb-2">Juliana Kus Inggardini</h3>
             <p className="text-sm text-brown-soft mb-4 uppercase tracking-widest">The Bride</p>
             <p className="text-sm text-brown-dark/80 mb-2">Putri dari</p>
-            <p className="text-sm font-medium text-brown-dark mb-6">Bapak Sugito &<br/>Ibu Endang Suningsih</p>
+            <p className="text-sm font-medium text-brown-dark mb-6">Bapak Sugito &<br />Ibu Endang Suningsih</p>
             <a href="#" className="inline-flex items-center text-brown-soft hover:text-brown-dark transition-colors">
               <Camera className="w-4 h-4 mr-2" />
               <span className="text-xs">@julianakus</span>
@@ -50,12 +50,12 @@ export default function CoupleSection() {
           {/* Groom Profile */}
           <motion.div variants={itemVariants} className="flex flex-col items-center">
             <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mb-6 shadow-xl border-8 border-white bg-cream">
-              <img src="/src/assets/groom.jpg" alt="Groom" className="w-full h-full object-cover focus:object-top" />
+              <img src="/src/assets/groom.jpeg" alt="Groom" className="w-full h-full object-cover focus:object-top" />
             </div>
             <h3 className="text-3xl font-serif text-brown-dark mb-2">Rexi Faza Juliansyah</h3>
             <p className="text-sm text-brown-soft mb-4 uppercase tracking-widest">The Groom</p>
             <p className="text-sm text-brown-dark/80 mb-2">Putra dari</p>
-            <p className="text-sm font-medium text-brown-dark mb-6">Bapak Ifdial &<br/>Ibu Lindawati</p>
+            <p className="text-sm font-medium text-brown-dark mb-6">Bapak Ifdial &<br />Ibu Lindawati</p>
             <a href="#" className="inline-flex items-center text-brown-soft hover:text-brown-dark transition-colors">
               <Camera className="w-4 h-4 mr-2" />
               <span className="text-xs">@rexifaza</span>

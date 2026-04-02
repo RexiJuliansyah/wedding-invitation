@@ -7,12 +7,12 @@ export default function GallerySection() {
 
   // Fallback using placeholder images since there's no real gallery images provided yet
   const images = [
-    '/src/assets/bride.jpg',
-    '/src/assets/groom.jpg',
-    '/src/assets/bride.jpg',
-    '/src/assets/groom.jpg',
-    '/src/assets/bride.jpg',
-    '/src/assets/groom.jpg'
+    '/src/assets/bride.jpeg',
+    '/src/assets/groom.jpeg',
+    '/src/assets/bride.jpeg',
+    '/src/assets/groom.jpeg',
+    '/src/assets/bride.jpeg',
+    '/src/assets/groom.jpeg'
   ];
 
   return (

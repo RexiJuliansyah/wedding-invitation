@@ -15,26 +15,26 @@ export default function HeroSection() {
         </p>
 
         {/* Illustrations container */}
-        <div className="relative w-full aspect-video sm:aspect-square max-h-[300px] mb-8 flex justify-center items-end">
-          <motion.img 
+        <div className="w-full mb-10 flex justify-center items-center gap-6 md:gap-8">
+          <motion.img
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            src="/src/assets/groom.jpg" 
-            alt="Groom" 
-            className="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border-4 border-cream-light shadow-md absolute -translate-x-8 z-0"
+            src="/src/assets/bride.jpeg"
+            alt="Bride"
+            className="w-32 h-32 md:w-44 md:h-44 object-cover rounded-full border-4 border-cream-light shadow-md"
           />
-          <motion.img 
+          <motion.img
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            src="/src/assets/bride.jpg" 
-            alt="Bride" 
-            className="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border-4 border-cream-light shadow-md absolute translate-x-8 z-10"
+            src="/src/assets/groom.jpeg"
+            alt="Groom"
+            className="w-32 h-32 md:w-44 md:h-44 object-cover rounded-full border-4 border-cream-light shadow-md"
           />
         </div>
 
         <h1 className="text-5xl md:text-6xl font-serif text-brown-dark mb-2">Juliana & Rexi</h1>
         <p className="italic text-brown-soft text-xl font-serif mb-6">Are getting married</p>
-        
+
         <div className="w-px h-12 bg-brown-soft mx-auto mb-6"></div>
         <p className="tracking-widest uppercase font-medium">11 . 07 . 2026</p>
       </motion.div>

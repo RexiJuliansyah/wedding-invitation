@@ -44,8 +44,8 @@ export default function App() {
             <CoupleSection />
             <EventDetails />
             <CountdownSection />
-            <StorySection />
-            {/* <GallerySection /> */}
+            {/* <StorySection /> */}
+            <GallerySection />
             <RSVPSection />
             <WishesSection />
             <ClosingSection />
