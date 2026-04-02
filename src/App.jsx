@@ -34,8 +34,8 @@ export default function App() {
   return (
     <div className="min-h-screen text-brown-dark font-sans relative overflow-x-hidden">
       {/* Fixed Background Layer to prevent jumpy behavior on mobile */}
-      <div 
-        className="fixed inset-0 z-[-1] bg-cover bg-center bg-no-repeat"
+      <div
+        className="fixed inset-0 z-[-1] bg-cover bg-[center_40%] bg-no-repeat"
         style={{ backgroundImage: `url(${bgTexture})` }}
       />
 
