@@ -5,7 +5,7 @@ export default function ClosingSection() {
   return (
     <section className="py-24 px-6 md:px-12 text-center bg-brown-dark text-cream relative">
       <div
-        className="fixed inset-0 z-[-1] bg-cover bg-[center_40%] bg-no-repeat"
+        className="fixed inset-0 z-[-1] bg-cover bg-[center_15%] bg-no-repeat opacity-40"
         style={{ backgroundImage: `url(${bgTexture})` }}
       ></div>
 
