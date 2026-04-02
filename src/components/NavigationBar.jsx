@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Home, Heart, Calendar, Image as ImageIcon, MessageSquare } from 'lucide-react';
+import { Home, Heart, Calendar, Image as ImageIcon, MessageSquare, Gift } from 'lucide-react';
 
 export default function NavigationBar() {
   const [activeSegment, setActiveSegment] = useState('home');
@@ -8,6 +8,7 @@ export default function NavigationBar() {
     { id: 'home', icon: Home, label: 'Home' },
     { id: 'couple', icon: Heart, label: 'Couple' },
     { id: 'event', icon: Calendar, label: 'Event' },
+    { id: 'gift', icon: Gift, label: 'Gift' },
     // { id: 'gallery', icon: ImageIcon, label: 'Gallery' },
     { id: 'wishes', icon: MessageSquare, label: 'Wishes' },
   ];

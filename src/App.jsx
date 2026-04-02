@@ -8,6 +8,7 @@ import EventDetails from './sections/EventDetails';
 import CountdownSection from './sections/CountdownSection';
 // import StorySection from './sections/StorySection';
 // import GallerySection from './sections/GallerySection';
+import GiftSection from './sections/GiftSection';
 import RSVPSection from './sections/RSVPSection';
 import WishesSection from './sections/WishesSection';
 import ClosingSection from './sections/ClosingSection';
@@ -57,6 +58,7 @@ export default function App() {
             <CountdownSection />
             {/* <StorySection /> */}
             {/* <GallerySection /> */}
+            <GiftSection />
             <RSVPSection />
             <WishesSection />
             <ClosingSection />

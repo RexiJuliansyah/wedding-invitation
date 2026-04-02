@@ -5,8 +5,8 @@ export default function ClosingSection() {
   return (
     <section className="py-24 px-6 md:px-12 text-center bg-brown-dark text-cream relative">
       <div
-        className="absolute inset-0 opacity-10 mix-blend-multiply pointer-events-none"
-        style={{ backgroundImage: `url(${bgTexture})`, backgroundSize: 'cover' }}
+        className="fixed inset-0 z-[-1] bg-cover bg-[center_40%] bg-no-repeat"
+        style={{ backgroundImage: `url(${bgTexture})` }}
       ></div>
 
       <motion.div

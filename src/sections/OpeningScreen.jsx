@@ -12,8 +12,8 @@ export default function OpeningScreen({ guestName, onOpen }) {
       className="fixed inset-0 z-50 flex flex-col items-center justify-center text-center overflow-hidden"
     >
       {/* Fixed Background Layer for Opening Screen */}
-      <div 
-        className="absolute inset-0 z-[-1] bg-cover bg-[center_25%] bg-no-repeat"
+      <div
+        className="fixed inset-0 z-[-1] bg-cover bg-[center_40%] bg-no-repeat"
         style={{ backgroundImage: `url(${bgTexture})` }}
       />
 
