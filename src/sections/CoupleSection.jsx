@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { Instagram } from 'lucide-react';
 import brideImg from '../assets/bride.jpeg';
 import groomImg from '../assets/groom.jpeg';
 
