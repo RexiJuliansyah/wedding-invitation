@@ -10,7 +10,7 @@ export default function MusicPlayer() {
     // Create an audio element attached to the document
     if (!audioRef.current) {
       // Gunakan audio lokal agar tidak ada error dari link eksternal yang mati atau terkena blokir
-      const audio = new Audio('/music.mp3');
+      const audio = new Audio('/music.m4a');
       audio.loop = true;
       audio.volume = 0.5;
       audioRef.current = audio;
@@ -39,7 +39,7 @@ export default function MusicPlayer() {
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 1, duration: 0.5 }}
       onClick={togglePlay}
-      className="fixed bottom-6 right-6 z-50 p-3 bg-brown-dark/90 text-cream rounded-full shadow-lg backdrop-blur-sm transition-transform hover:scale-110"
+      className="fixed bottom-[100px] md:bottom-[115px] right-6 md:right-10 z-50 p-2.5 bg-brown-dark/80 text-cream rounded-full shadow-lg backdrop-blur-md transition-all hover:scale-110 hover:bg-brown-dark active:scale-95"
     >
       {isPlaying ? (
         <Music className="w-5 h-5 animate-spin-slow" style={{ animationDuration: '3s' }} />

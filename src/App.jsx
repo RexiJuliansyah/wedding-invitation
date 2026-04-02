@@ -6,8 +6,8 @@ import PrayerSection from './sections/PrayerSection';
 import CoupleSection from './sections/CoupleSection';
 import EventDetails from './sections/EventDetails';
 import CountdownSection from './sections/CountdownSection';
-import StorySection from './sections/StorySection';
-import GallerySection from './sections/GallerySection';
+// import StorySection from './sections/StorySection';
+// import GallerySection from './sections/GallerySection';
 import RSVPSection from './sections/RSVPSection';
 import WishesSection from './sections/WishesSection';
 import ClosingSection from './sections/ClosingSection';
@@ -49,7 +49,7 @@ export default function App() {
             <EventDetails />
             <CountdownSection />
             {/* <StorySection /> */}
-            <GallerySection />
+            {/* <GallerySection /> */}
             <RSVPSection />
             <WishesSection />
             <ClosingSection />

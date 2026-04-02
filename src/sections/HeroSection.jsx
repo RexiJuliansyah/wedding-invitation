@@ -34,8 +34,8 @@ export default function HeroSection() {
           />
         </div>
 
-        <h1 className="text-5xl md:text-6xl font-serif text-brown-dark mb-2">Juliana & Rexi</h1>
-        <p className="italic text-brown-soft text-xl font-serif mb-6">Are getting married</p>
+        <h1 className="text-5xl md:text-6xl font-serif text-brown-dark mb-2">Julia & Rexi</h1>
+        <p className="italic text-brown-soft text-xl font-serif mb-6">#AkhirnyaJulianSyahinJulia</p>
 
         <div className="w-px h-12 bg-brown-soft mx-auto mb-6"></div>
         <p className="tracking-widest uppercase font-medium">11 . 07 . 2026</p>

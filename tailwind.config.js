@@ -24,7 +24,7 @@ export default {
         sans: ['"Inter"', 'sans-serif'],
       },
       backgroundImage: {
-        'watercolor': "url('/src/assets/bg-texture.jpg')", // We'll assume the user places it here
+        'texture': "url('/src/assets/bg-texture.png')",
       }
     },
   },

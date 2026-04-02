@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import bgTexture from '../assets/bg-texture.jpg';
+import bgTexture from '../assets/bg-texture.png';
 
 export default function ClosingSection() {
   return (
