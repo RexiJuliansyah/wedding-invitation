@@ -13,6 +13,7 @@ import WishesSection from './sections/WishesSection';
 import ClosingSection from './sections/ClosingSection';
 import MusicPlayer from './components/MusicPlayer';
 import NavigationBar from './components/NavigationBar';
+import bgTexture from './assets/bg-texture.png';
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +32,10 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-texture bg-cover bg-fixed bg-center text-brown-dark font-sans relative">
+    <div 
+      className="min-h-screen bg-cover bg-fixed bg-center text-brown-dark font-sans relative"
+      style={{ backgroundImage: `url(${bgTexture})` }}
+    >
       <AnimatePresence>
         {!isOpen && (
           <OpeningScreen guestName={guestName} onOpen={handleOpen} />

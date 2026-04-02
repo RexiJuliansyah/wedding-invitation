@@ -23,14 +23,14 @@ export default function HeroSection() {
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             src={brideImg}
             alt="Bride"
-            className="w-32 h-32 md:w-44 md:h-44 object-cover rounded-full border-4 border-cream-light shadow-md"
+            className="w-32 h-32 md:w-44 md:h-44 object-cover object-top rounded-full border-4 border-cream-light shadow-md"
           />
           <motion.img
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             src={groomImg}
             alt="Groom"
-            className="w-32 h-32 md:w-44 md:h-44 object-cover rounded-full border-4 border-cream-light shadow-md"
+            className="w-32 h-32 md:w-44 md:h-44 object-cover object-top rounded-full border-4 border-cream-light shadow-md"
           />
         </div>
 

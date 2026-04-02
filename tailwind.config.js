@@ -24,7 +24,6 @@ export default {
         sans: ['"Inter"', 'sans-serif'],
       },
       backgroundImage: {
-        'texture': "url('/src/assets/bg-texture.png')",
       }
     },
   },

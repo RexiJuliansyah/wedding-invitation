@@ -9,17 +9,18 @@ export default function OpeningScreen({ guestName, onOpen }) {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, y: '-100%' }}
       transition={{ duration: 1.2, ease: [0.83, 0, 0.39, 1] }}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-texture bg-cover bg-fixed bg-center text-center overflow-hidden"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-cover bg-fixed bg-center text-center overflow-hidden"
+      style={{ backgroundImage: `url(${bgTexture})` }}
     >
 
-      <motion.div 
+      <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1, delay: 0.2 }}
         className="relative z-10 flex flex-col items-center p-8 max-w-md mx-auto"
       >
         <p className="text-sm tracking-widest uppercase mb-4 text-brown-soft">The Wedding Of</p>
-        <h1 className="text-6xl mb-6 text-brown-dark italic font-serif">Juliana & Rexi</h1>
+        <h1 className="text-6xl mb-6 text-brown-dark italic font-serif">Julia & Rexi</h1>
 
         <div className="my-8 mb-12">
           <p className="text-sm mb-2 text-brown-dark/70">Kepada Yth.</p>
