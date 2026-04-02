@@ -42,17 +42,17 @@ export default function App() {
         <>
           <MusicPlayer />
           <NavigationBar />
-          <div className="relative z-0 h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory">
-            <div className="snap-start min-h-screen flex flex-col justify-center"><HeroSection /></div>
-            <div className="snap-start min-h-screen flex flex-col justify-center"><PrayerSection /></div>
-            <div className="snap-start min-h-screen flex flex-col justify-center"><CoupleSection /></div>
-            <div className="snap-start min-h-screen flex flex-col justify-center"><EventDetails /></div>
-            <div className="snap-start min-h-screen flex flex-col justify-center"><CountdownSection /></div>
-            {/* <div className="snap-start min-h-screen flex flex-col justify-center"><StorySection /></div> */}
-            <div className="snap-start min-h-screen flex flex-col justify-center"><GallerySection /></div>
-            <div className="snap-start min-h-screen flex flex-col justify-center"><RSVPSection /></div>
-            <div className="snap-start min-h-screen flex flex-col justify-center"><WishesSection /></div>
-            <div className="snap-start min-h-screen flex flex-col justify-center"><ClosingSection /></div>
+          <div className="relative z-0 scroll-smooth">
+            <HeroSection />
+            <PrayerSection />
+            <CoupleSection />
+            <EventDetails />
+            <CountdownSection />
+            {/* <StorySection /> */}
+            <GallerySection />
+            <RSVPSection />
+            <WishesSection />
+            <ClosingSection />
           </div>
         </>
       )}
