@@ -78,9 +78,9 @@ export default function App() {
             <SectionDivider />
             <EventDetails />
             <CountdownSection />
-            <SectionDivider />
+            {/* <SectionDivider /> */}
             {/* <StorySection /> */}
-            <SectionDivider />
+            {/* <SectionDivider /> */}
             {/* <GallerySection /> */}
             <SectionDivider />
             <GiftSection />
