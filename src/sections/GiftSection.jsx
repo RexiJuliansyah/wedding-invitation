@@ -113,7 +113,7 @@ export default function GiftSection() {
           ))}
         </div>
 
-        {/* <motion.div variants={itemVariants} className="glass-panel p-8 md:p-12 max-w-2xl mx-auto">
+        <motion.div variants={itemVariants} className="glass-panel p-8 md:p-12 max-w-2xl mx-auto">
           <div className="flex flex-col items-center gap-4">
             <MapPin className="w-8 h-8 text-brown-soft" />
             <div>
@@ -131,7 +131,7 @@ export default function GiftSection() {
               </button>
             </div>
           </div>
-        </motion.div> */}
+        </motion.div>
       </motion.div>
     </section>
   );

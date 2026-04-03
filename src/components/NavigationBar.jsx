@@ -9,7 +9,7 @@ export default function NavigationBar() {
     { id: 'couple', icon: Heart, label: 'Couple' },
     { id: 'event', icon: Calendar, label: 'Event' },
     { id: 'gift', icon: Gift, label: 'Gift' },
-    // { id: 'gallery', icon: ImageIcon, label: 'Gallery' },
+    { id: 'gallery', icon: ImageIcon, label: 'Gallery' },
     { id: 'wishes', icon: MessageSquare, label: 'Wishes' },
   ];
 
@@ -55,8 +55,8 @@ export default function NavigationBar() {
               href={`#${item.id}`}
               onClick={() => handleNavClick(item.id)}
               className={`flex flex-col items-center justify-center transition-all duration-300 relative group ${isActive
-                  ? 'text-brown-dark scale-110'
-                  : 'text-brown-dark/30 hover:text-brown-dark/60'
+                ? 'text-brown-dark scale-110'
+                : 'text-brown-dark/30 hover:text-brown-dark/60'
                 }`}
             >
               {/* Active Indicator Dot */}

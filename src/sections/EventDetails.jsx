@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MapPin, Calendar, Clock } from 'lucide-react';
+import { MapPin, Calendar, Clock, CalendarPlus } from 'lucide-react';
 
 export default function EventDetails() {
   return (
@@ -54,14 +54,24 @@ export default function EventDetails() {
             </div>
           </div>
 
-          <a
-            href="https://maps.google.com/?q=Ponyo+Resto+Cinunuk+Cileunyi"
-            target="_blank"
-            rel="noreferrer"
-            className="mt-auto px-6 py-2 border border-brown-dark text-brown-dark hover:bg-brown-dark hover:text-cream rounded-full transition-colors text-sm tracking-wide"
-          >
-            Open Map
-          </a>
+          <div className="mt-auto flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <a
+              href="https://maps.google.com/?q=Ponyo+Resto+Cinunuk+Cileunyi"
+              target="_blank"
+              rel="noreferrer"
+              className="px-6 py-2 border border-brown-dark text-brown-dark hover:bg-brown-dark hover:text-cream rounded-full transition-colors text-sm tracking-wide text-center"
+            >
+              Open Map
+            </a>
+            <a
+              href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+Julia+%26+Rexi+%E2%80%94+Akad+Nikah&dates=20260711T010000Z/20260711T030000Z&details=Akad+Nikah+Julia+%26+Rexi+di+Ponyo+Resto+%26+Wedding&location=Ponyo+Resto+%26+Wedding%2C+Jl.+Raya+Cinunuk+No.186%2C+Bandung&sf=true"
+              target="_blank"
+              rel="noreferrer"
+              className="px-6 py-2 bg-brown-dark text-cream hover:bg-brown-dark/90 rounded-full transition-colors text-sm tracking-wide flex items-center justify-center gap-2"
+            >
+              <CalendarPlus className="w-4 h-4" /> Save Date
+            </a>
+          </div>
         </motion.div>
 
         {/* Resepsi Card */}
@@ -93,14 +103,24 @@ export default function EventDetails() {
             </div>
           </div>
 
-          <a
-            href="https://maps.google.com/?q=Ponyo+Resto+Cinunuk+Cileunyi"
-            target="_blank"
-            rel="noreferrer"
-            className="mt-auto px-6 py-2 border border-brown-dark text-brown-dark hover:bg-brown-dark hover:text-cream rounded-full transition-colors text-sm tracking-wide"
-          >
-            Open Map
-          </a>
+          <div className="mt-auto flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <a
+              href="https://maps.google.com/?q=Ponyo+Resto+Cinunuk+Cileunyi"
+              target="_blank"
+              rel="noreferrer"
+              className="px-6 py-2 border border-brown-dark text-brown-dark hover:bg-brown-dark hover:text-cream rounded-full transition-colors text-sm tracking-wide text-center"
+            >
+              Open Map
+            </a>
+            <a
+              href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+Julia+%26+Rexi+%E2%80%94+Resepsi&dates=20260711T040000Z/20260711T063000Z&details=Resepsi+Pernikahan+Julia+%26+Rexi+di+Ponyo+Resto+%26+Wedding&location=Ponyo+Resto+%26+Wedding%2C+Jl.+Raya+Cinunuk+No.186%2C+Bandung&sf=true"
+              target="_blank"
+              rel="noreferrer"
+              className="px-6 py-2 bg-brown-dark text-cream hover:bg-brown-dark/90 rounded-full transition-colors text-sm tracking-wide flex items-center justify-center gap-2"
+            >
+              <CalendarPlus className="w-4 h-4" /> Save Date
+            </a>
+          </div>
         </motion.div>
       </div>
 

@@ -35,6 +35,13 @@ export default function ClosingSection() {
             <p>Ifdial</p>
           </div>
         </div>
+
+        {/* Footer Credit */}
+        <div className="mt-20 pt-8 border-t border-cream/10">
+          <p className="text-cream/30 text-xs tracking-widest">
+            Made with ❤️ by Rexi
+          </p>
+        </div>
       </motion.div>
     </section>
   );
