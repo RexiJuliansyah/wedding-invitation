@@ -18,3 +18,25 @@
     @apply bg-cream-light backdrop-blur-md border border-white/40 shadow-xl rounded-2xl;
   }
 }
+
+/* Animasi kelopak bunga jatuh — dijalankan oleh GPU (transform + opacity) */
+@keyframes petal-fall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) translateX(var(--x-end, 0)) rotate(calc(var(--rotation, 0deg) + 360deg));
+    opacity: 0;
+  }
+}
+
+.animate-petal-fall {
+  animation: petal-fall linear infinite;
+}

@@ -1,11 +1,10 @@
-import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 // Bentuk kelopak bunga sederhana menggunakan SVG
-const PetalSVG = () => (
+const PetalSVG = ({ color }) => (
   <svg
     viewBox="0 0 24 24"
-    fill="currentColor"
+    fill={color}
     className="w-full h-full"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -17,37 +16,23 @@ export default function FloatingParticles() {
   const [particles, setParticles] = useState([]);
 
   useEffect(() => {
-    // Generate konfigurasi acak untuk beberapa kelopak
-    const petalCount = 50;
-    // Warna soft pink yang setema dengan undangan (cream-brown + sentuhan pink lembut)
-    const colors = [
-      'text-[#F4E3E5]',   // pastel pink (dari tema)
-      'text-[#F2D1D5]',   // soft rose
-      'text-[#EDCACD]',   // dusty pink
-      'text-[#F8E0E0]',   // blush pink terang
-      'text-[#EDD5CE]',   // warm pink-cream blend
-    ];
+    // Deteksi apakah device mobile (layar kecil) untuk mengurangi jumlah partikel
+    const isMobile = window.innerWidth < 768;
+    const petalCount = isMobile ? 15 : 35;
+
+    const colors = ['#F4E3E5', '#F2D1D5', '#EDCACD', '#F8E0E0', '#EDD5CE'];
 
     const newParticles = Array.from({ length: petalCount }).map((_, i) => {
-      const xPos = Math.random() * 100;
+      const xStart = Math.random() * 100;
+      const xEnd = xStart + (Math.random() * 10 - 5); // sedikit zigzag
       const delay = Math.random() * 15;
-      const duration = 12 + Math.random() * 15;
-      const size = 12 + Math.random() * 20;
-      // Opasitas dinaikkan drastis agar terlihat terang benderang
-      const opacity = 0.7 + Math.random() * 0.3;
+      const duration = 14 + Math.random() * 16;
+      const size = 12 + Math.random() * 18;
+      const opacity = 0.5 + Math.random() * 0.4;
+      const rotation = Math.random() * 360;
+      const color = colors[Math.floor(Math.random() * colors.length)];
 
-      const colorClass = colors[Math.floor(Math.random() * colors.length)];
-
-      return {
-        id: i,
-        xParams: [xPos + 'vw', xPos - 5 + 'vw', xPos + 5 + 'vw', xPos + 'vw'], // Zigzag turun
-        delay,
-        duration,
-        size,
-        opacity,
-        colorClass,
-        rotation: Math.random() * 360,
-      };
+      return { id: i, xStart, xEnd, delay, duration, size, opacity, rotation, color };
     });
 
     setParticles(newParticles);
@@ -56,31 +41,24 @@ export default function FloatingParticles() {
   return (
     <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
       {particles.map((p) => (
-        <motion.div
+        <div
           key={p.id}
-          // Tambahkan drop-shadow agar bunga semakin terlepas/terpisah dari warna background
-          className={`absolute ${p.colorClass} drop-shadow-md`}
+          className="absolute animate-petal-fall drop-shadow-sm"
           style={{
             width: p.size,
             height: p.size,
             opacity: p.opacity,
-            left: 0,
-            top: '-5%', // Mulai dari luar layar atas
-          }}
-          animate={{
-            y: ['0vh', '110vh'],
-            x: p.xParams,
-            rotate: [p.rotation, p.rotation + 200, p.rotation - 100, p.rotation + 360],
-          }}
-          transition={{
-            duration: p.duration,
-            repeat: Infinity,
-            delay: p.delay,
-            ease: "linear",
+            left: `${p.xStart}vw`,
+            top: '-5%',
+            '--x-end': `${p.xEnd - p.xStart}vw`,
+            '--rotation': `${p.rotation}deg`,
+            animationDuration: `${p.duration}s`,
+            animationDelay: `${p.delay}s`,
+            willChange: 'transform',
           }}
         >
-          <PetalSVG />
-        </motion.div>
+          <PetalSVG color={p.color} />
+        </div>
       ))}
     </div>
   );
