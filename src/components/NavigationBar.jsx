@@ -9,7 +9,7 @@ export default function NavigationBar() {
     { id: 'couple', icon: Heart, label: 'Couple' },
     { id: 'event', icon: Calendar, label: 'Event' },
     { id: 'gift', icon: Gift, label: 'Gift' },
-    { id: 'gallery', icon: ImageIcon, label: 'Gallery' },
+    // { id: 'gallery', icon: ImageIcon, label: 'Gallery' },
     { id: 'wishes', icon: MessageSquare, label: 'Wishes' },
   ];
 

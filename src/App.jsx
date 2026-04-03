@@ -79,9 +79,9 @@ export default function App() {
             <EventDetails />
             <CountdownSection />
             <SectionDivider />
-            <StorySection />
+            {/* <StorySection /> */}
             <SectionDivider />
-            <GallerySection />
+            {/* <GallerySection /> */}
             <SectionDivider />
             <GiftSection />
             <RSVPSection />
