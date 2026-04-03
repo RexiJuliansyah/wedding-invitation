@@ -6,6 +6,11 @@ import { useWishes } from '../hooks/useWishes';
 export default function RSVPSection() {
   const { addWish } = useWishes();
   
+  // Baca status dari storage lokal saat komponen pertama kali dirender
+  const [hasSubmitted, setHasSubmitted] = useState(() => {
+    return localStorage.getItem('rsvp_submitted') === 'true';
+  });
+
   const [formData, setFormData] = useState({
     name: '',
     attendance: 'Hadir',
@@ -29,9 +34,15 @@ export default function RSVPSection() {
       });
       setLoading(false);
       setSuccess(true);
-      setFormData({ name: '', attendance: 'Hadir', message: '' });
       
-      setTimeout(() => setSuccess(false), 3000);
+      // Simpan status bahwa pengunjung ini sudah mengirim doa
+      localStorage.setItem('rsvp_submitted', 'true');
+      
+      // Ubah tampilan menjadi pesan Terimakasih
+      setTimeout(() => {
+        setHasSubmitted(true);
+      }, 1500); // Beri jeda 1.5 detik agar melihat centang sukses dulu
+      
     }, 1000);
   };
 
@@ -48,74 +59,88 @@ export default function RSVPSection() {
           <p className="text-brown-dark/70 text-sm">Harap konfirmasi kehadiran Anda</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-          <div>
-            <label className="block text-sm font-medium text-brown-dark mb-2 uppercase tracking-widest text-xs">Nama Lengkap</label>
-            <input 
-              type="text" 
-              value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
-              className="w-full border-b border-brown-soft/50 bg-transparent px-2 py-2 focus:outline-none focus:border-brown-dark text-brown-dark"
-              required
-              placeholder="Fulan bin Fulan"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-brown-dark mb-2 uppercase tracking-widest text-xs">Kehadiran</label>
-            <div className="flex gap-4">
-              <label className="flex items-center space-x-2 cursor-pointer">
-                <input 
-                  type="radio" 
-                  name="attendance" 
-                  value="Hadir"
-                  checked={formData.attendance === 'Hadir'}
-                  onChange={(e) => setFormData({...formData, attendance: e.target.value})}
-                  className="accent-brown-dark"
-                />
-                <span className="text-brown-dark">Hadir</span>
-              </label>
-              <label className="flex items-center space-x-2 cursor-pointer">
-                <input 
-                  type="radio" 
-                  name="attendance" 
-                  value="Tidak Hadir"
-                  checked={formData.attendance === 'Tidak Hadir'}
-                  onChange={(e) => setFormData({...formData, attendance: e.target.value})}
-                  className="accent-brown-dark"
-                />
-                <span className="text-brown-dark">Tidak Hadir</span>
-              </label>
+        {hasSubmitted ? (
+          <div className="text-center bg-cream/50 p-8 rounded-2xl border border-brown-soft/30 z-10 relative">
+            <div className="w-16 h-16 bg-green-100/80 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+              </svg>
             </div>
+            <h3 className="text-xl font-bold text-brown-dark mb-2">Terima Kasih!</h3>
+            <p className="text-brown-dark/80 text-sm">
+              Konfirmasi kehadiran dan doa Anda telah berhasil kami terima.
+            </p>
           </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+            <div>
+              <label className="block text-sm font-medium text-brown-dark mb-2 uppercase tracking-widest text-xs">Nama Lengkap</label>
+              <input 
+                type="text" 
+                value={formData.name}
+                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                className="w-full border-b border-brown-soft/50 bg-transparent px-2 py-2 focus:outline-none focus:border-brown-dark text-brown-dark"
+                required
+                placeholder="Fulan bin Fulan"
+              />
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-brown-dark mb-2 uppercase tracking-widest text-xs">Pesan / Doa</label>
-            <textarea 
-              value={formData.message}
-              onChange={(e) => setFormData({...formData, message: e.target.value})}
-              className="w-full border border-brown-soft/50 bg-cream/50 rounded-lg px-4 py-3 focus:outline-none focus:border-brown-dark text-brown-dark min-h-[100px]"
-              required
-              placeholder="Tuliskan doa untuk kedua mempelai..."
-            ></textarea>
-          </div>
+            <div>
+              <label className="block text-sm font-medium text-brown-dark mb-2 uppercase tracking-widest text-xs">Kehadiran</label>
+              <div className="flex gap-4">
+                <label className="flex items-center space-x-2 cursor-pointer">
+                  <input 
+                    type="radio" 
+                    name="attendance" 
+                    value="Hadir"
+                    checked={formData.attendance === 'Hadir'}
+                    onChange={(e) => setFormData({...formData, attendance: e.target.value})}
+                    className="accent-brown-dark"
+                  />
+                  <span className="text-brown-dark">Hadir</span>
+                </label>
+                <label className="flex items-center space-x-2 cursor-pointer">
+                  <input 
+                    type="radio" 
+                    name="attendance" 
+                    value="Tidak Hadir"
+                    checked={formData.attendance === 'Tidak Hadir'}
+                    onChange={(e) => setFormData({...formData, attendance: e.target.value})}
+                    className="accent-brown-dark"
+                  />
+                  <span className="text-brown-dark">Tidak Hadir</span>
+                </label>
+              </div>
+            </div>
 
-          <button 
-            type="submit" 
-            disabled={loading}
-            className="w-full py-3 bg-brown-dark text-cream rounded-lg hover:bg-brown-dark/90 transition flex justify-center items-center font-medium disabled:opacity-70 disabled:cursor-not-allowed"
-          >
-            {loading ? (
-              <span className="animate-pulse">Mengirim...</span>
-            ) : success ? (
-              <span className="text-green-300">Terkirim ✓</span>
-            ) : (
-              <>
-                Kirim Konfirmasi <Send className="w-4 h-4 ml-2" />
-              </>
-            )}
-          </button>
-        </form>
+            <div>
+              <label className="block text-sm font-medium text-brown-dark mb-2 uppercase tracking-widest text-xs">Pesan / Doa</label>
+              <textarea 
+                value={formData.message}
+                onChange={(e) => setFormData({...formData, message: e.target.value})}
+                className="w-full border border-brown-soft/50 bg-cream/50 rounded-lg px-4 py-3 focus:outline-none focus:border-brown-dark text-brown-dark min-h-[100px]"
+                required
+                placeholder="Tuliskan doa untuk kedua mempelai..."
+              ></textarea>
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={loading}
+              className="w-full py-3 bg-brown-dark text-cream rounded-lg hover:bg-brown-dark/90 transition flex justify-center items-center font-medium disabled:opacity-70 disabled:cursor-not-allowed"
+            >
+              {loading ? (
+                <span className="animate-pulse">Mengirim...</span>
+              ) : success ? (
+                <span className="text-green-300">Terkirim ✓</span>
+              ) : (
+                <>
+                  Kirim Konfirmasi <Send className="w-4 h-4 ml-2" />
+                </>
+              )}
+            </button>
+          </form>
+        )}
       </motion.div>
     </section>
   );
