@@ -35,8 +35,9 @@ export default function App() {
   return (
     <div className="min-h-screen text-brown-dark font-sans relative overflow-x-hidden">
       {/* Fixed Background Layer to prevent jumpy behavior on mobile */}
+      {/* Menggunakan h-[100lvh] atau dvh/svh untuk mencegah loncatan saat address bar HP disembunyikan/dimunculkan */}
       <div
-        className="fixed inset-0 z-[-1] bg-cover bg-[center_15%] bg-no-repeat opacity-40"
+        className="fixed top-0 left-0 w-full h-[100lvh] z-[-1] bg-cover bg-[center_15%] bg-no-repeat opacity-40"
         style={{ backgroundImage: `url(${bgTexture})` }}
       />
 
