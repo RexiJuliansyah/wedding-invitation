@@ -39,7 +39,7 @@ export default function FloatingParticles() {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+    <div className="fixed inset-0 z-40 pointer-events-none overflow-hidden max-w-[500px] mx-auto left-0 right-0">
       {particles.map((p) => (
         <div
           key={p.id}
@@ -48,9 +48,9 @@ export default function FloatingParticles() {
             width: p.size,
             height: p.size,
             opacity: p.opacity,
-            left: `${p.xStart}vw`,
+            left: `${p.xStart}%`,
             top: '-5%',
-            '--x-end': `${p.xEnd - p.xStart}vw`,
+            '--x-end': `${p.xEnd - p.xStart}%`,
             '--rotation': `${p.rotation}deg`,
             animationDuration: `${p.duration}s`,
             animationDelay: `${p.delay}s`,

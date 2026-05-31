@@ -7,11 +7,11 @@
    ============================================================ */
 :root {
   /* Colors */
-  --navy: #8B7355;
-  --navy-dark: #6C5942;
-  --navy-light: #A38C6D;
-  --cream: #FDF9F3;
-  --cream-dark: #F5EDE2;
+  --navy: #937066;
+  --navy-dark: #75564D;
+  --navy-light: #B5968E;
+  --cream: #FDF5EC;
+  --cream-dark: #F4E6D6;
   --gold: #C8A96E;
   --gold-light: #D4BF91;
   --dusty-blue: #4A7C9B;
@@ -179,11 +179,11 @@ a {
 }
 
 .watercolor-stain--top-right {
-  width: 280px;
-  height: 280px;
-  top: -40px;
-  right: -60px;
-  background: radial-gradient(circle, rgba(210, 170, 140, 0.25) 0%, transparent 70%);
+  width: 300px;
+  height: 300px;
+  top: -50px;
+  right: -50px;
+  background: radial-gradient(circle, rgba(230, 190, 175, 0.25) 0%, transparent 70%);
 }
 
 .watercolor-stain--bottom-left {
@@ -191,7 +191,7 @@ a {
   height: 250px;
   bottom: -30px;
   left: -50px;
-  background: radial-gradient(circle, rgba(210, 170, 140, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(230, 190, 175, 0.3) 0%, transparent 70%);
 }
 
 .watercolor-stain--center {
@@ -200,15 +200,15 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(210, 170, 140, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(230, 190, 175, 0.2) 0%, transparent 70%);
 }
 
 /* ============================================================
    ORNAMENT THEME OVERRIDE
    ============================================================ */
 .theme-ornament {
-  /* Converts original green/pink into a warm taupe/terracotta (#8B7355) */
-  filter: sepia(1) hue-rotate(-20deg) saturate(1.2) brightness(0.85) contrast(1.1);
+  /* Converts original green/pink into a creamy taupe with pink hint (#937066) */
+  filter: sepia(1) hue-rotate(-30deg) saturate(1.0) brightness(0.9) contrast(1.1);
 }
 
 /* ============================================================
@@ -998,8 +998,8 @@ a {
   gap: 8px;
   padding: 8px 18px;
   border-radius: 20px;
-  background: rgba(139, 115, 85, 0.6);
-  /* Translucent brown */
+  background: rgba(147, 112, 102, 0.6);
+  /* Translucent creamy pinkish taupe */
   border: 1px solid rgba(255, 255, 255, 0.4);
   color: var(--white);
   transition: var(--transition-default);
@@ -2171,4 +2171,22 @@ a {
   /* Tweak opacity so it's clear but not overpowering */
   z-index: -1;
   pointer-events: none;
+}
+
+/* ============================================================
+   FLOATING PARTICLES ANIMATION
+   ============================================================ */
+@keyframes petal-fall {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(var(--x-end), 110vh, 0) rotate(var(--rotation));
+  }
+}
+
+.animate-petal-fall {
+  animation-name: petal-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }

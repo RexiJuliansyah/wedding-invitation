@@ -12,6 +12,7 @@ import ClosingSection from './sections/ClosingSection';
 
 import FloatingMusic from './components/FloatingMusic';
 import FloatingNavbar from './components/FloatingNavbar';
+import FloatingParticles from './components/FloatingParticles';
 
 import { invitationData } from './data/invitationData';
 import WaveDivider from './components/WaveDivider';
@@ -90,6 +91,7 @@ function App() {
       <div className={`global-elements ${isOpen ? 'global-elements--visible' : ''}`}>
         <FloatingMusic isPlaying={isMusicPlaying} onToggle={toggleMusic} />
         <FloatingNavbar />
+        <FloatingParticles />
       </div>
     </div>
   );

@@ -39,7 +39,6 @@ const WishesSection = () => {
   // Stats
   const totalHadir = wishes.filter(w => w.attendance === 'Hadir').length;
   const totalTidak = wishes.filter(w => w.attendance === 'Tidak Hadir').length;
-  const totalRagu = wishes.filter(w => w.attendance === 'Ragu-ragu').length;
 
   return (
     <section className="wishes-section" id="wishes">
@@ -71,9 +70,6 @@ const WishesSection = () => {
           </span>
           <span className="wishes-stat-badge badge-tidak">
             ❌ {totalTidak} Tidak Hadir
-          </span>
-          <span className="wishes-stat-badge badge-ragu">
-            🤔 {totalRagu} Ragu-ragu
           </span>
         </motion.div>
 
@@ -107,7 +103,6 @@ const WishesSection = () => {
           >
             <option value="Hadir">Konfirmasi Kehadiran — Hadir</option>
             <option value="Tidak Hadir">Konfirmasi Kehadiran — Tidak Hadir</option>
-            <option value="Ragu-ragu">Konfirmasi Kehadiran — Masih Ragu</option>
           </select>
 
           <button type="submit" className="btn-submit" disabled={isSubmitting}>
@@ -130,14 +125,10 @@ const WishesSection = () => {
                   style={{
                     background: wish.attendance === 'Hadir'
                       ? 'rgba(39, 174, 96, 0.2)'
-                      : wish.attendance === 'Ragu-ragu'
-                        ? 'rgba(241, 196, 15, 0.2)'
-                        : 'rgba(231, 76, 60, 0.2)',
+                      : 'rgba(231, 76, 60, 0.2)',
                     color: wish.attendance === 'Hadir'
                       ? '#5ED89B'
-                      : wish.attendance === 'Ragu-ragu'
-                        ? '#F1C40F'
-                        : '#F08B80',
+                      : '#F08B80',
                   }}
                 >
                   {wish.attendance}
