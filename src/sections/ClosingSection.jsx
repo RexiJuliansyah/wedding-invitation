@@ -1,48 +1,90 @@
+import React from 'react';
 import { motion } from 'framer-motion';
-import bgTexture from '../assets/bg-texture.png';
+import { FloralCornerStack, FloralAccent } from '../components/FloralOrnaments';
+import WaveDivider from '../components/WaveDivider';
+import { invitationData } from '../data/invitationData';
+import closingImage from '../assets/groom.jpeg'; // Note: using groom.jpeg instead of image3.png which might not exist
 
-export default function ClosingSection() {
+const ClosingSection = () => {
+  const { couple, meta } = invitationData;
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+  };
+
+  const zoomIn = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } }
+  };
+
   return (
-    <section className="py-24 px-6 md:px-12 text-center bg-brown-dark text-cream relative">
-      <div
-        className="fixed top-0 left-0 w-full h-[100lvh] z-[-1] bg-cover bg-[center_15%] bg-no-repeat opacity-40"
-        style={{ backgroundImage: `url(${bgTexture})` }}
-      ></div>
+    <>
+      <section className="closing-section" id="closing">
+        <div className="watercolor-stain watercolor-stain--top-right" />
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="relative z-10 max-w-2xl mx-auto"
-      >
-        <p className="text-sm tracking-widest uppercase text-cream/70 mb-8 italic">Terima Kasih</p>
+        {/* Stacked floral corners with wind animation */}
+        <FloralCornerStack position="top-left" />
+        <FloralCornerStack position="top-right" />
 
-        <p className="mb-12 text-cream/90 leading-relaxed font-light">
-          Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kedua mempelai.
-        </p>
+        <div className="relative z-10">
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={zoomIn}
+            className="closing-photo-wrapper"
+          >
+            {/* <div className="closing-photo-frame">
+              <img src={closingImage} alt={`${couple.groomNickname} & ${couple.brideNickname}`} loading="lazy" />
+            </div> */}
+            <FloralAccent className="couple-photo-floral" style={{ bottom: '-10px', right: '-30px', width: '85px' }} />
+          </motion.div>
 
-        <h2 className="text-5xl font-serif mb-4">Julia & Rexi</h2>
-        <p className="text-sm tracking-widest uppercase text-cream/50 mb-16">Kami yang berbahagia</p>
+          <motion.p
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+            className="closing-text"
+          >
+            {meta.closingText}
+          </motion.p>
 
-        <div className="flex flex-col md:flex-row justify-center items-center gap-8 text-sm text-cream/70 font-medium">
-          <div>
-            <p className="mb-1 uppercase tracking-widest text-xs opacity-50">Keluarga Bapak</p>
-            <p>Sugito</p>
-          </div>
-          <div className="hidden md:block opacity-30 text-2xl font-serif">&</div>
-          <div>
-            <p className="mb-1 uppercase tracking-widest text-xs opacity-50">Keluarga Bapak</p>
-            <p>Ifdial</p>
-          </div>
+          <motion.p
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+            className="closing-salam"
+          >
+            Wassalamu'alaikum Wr. Wb.
+          </motion.p>
+
+          <motion.p
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+            className="closing-names"
+          >
+            {couple.groomNickname} &amp; {couple.brideNickname}
+          </motion.p>
         </div>
 
-        {/* Footer Credit */}
-        <div className="mt-20 pt-8 border-t border-cream/10">
-          <p className="text-cream/30 text-xs tracking-widest">
-            Made with ❤️ by Rexi
-          </p>
+        <FloralCornerStack position="bottom-left" />
+        <FloralCornerStack position="bottom-right" />
+      </section>
+
+      <WaveDivider type="cream-to-navy" />
+
+      <footer className="footer" id="footer">
+        <p className="footer-credit">Made with ❤️ by {couple.groomNickname}</p>
+        <div className="footer-socials">
+          <a href={couple.groomIg} target="_blank" rel="noopener noreferrer" className="footer-social-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+          </a>
+          <a href={`https://wa.me/${meta.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="footer-social-btn" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+          </a>
         </div>
-      </motion.div>
-    </section>
+      </footer>
+    </>
   );
-}
+};
+
+export default ClosingSection;

@@ -1,95 +1,98 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import SplashScreen from './components/SplashScreen';
+
 import OpeningScreen from './sections/OpeningScreen';
 import HeroSection from './sections/HeroSection';
-import PrayerSection from './sections/PrayerSection';
 import CoupleSection from './sections/CoupleSection';
-import EventDetails from './sections/EventDetails';
-import CountdownSection from './sections/CountdownSection';
-import StorySection from './sections/StorySection';
-import GallerySection from './sections/GallerySection';
+import QuoteSection from './sections/QuoteSection';
+import EventSection from './sections/EventDetails';
 import GiftSection from './sections/GiftSection';
-import RSVPSection from './sections/RSVPSection';
 import WishesSection from './sections/WishesSection';
 import ClosingSection from './sections/ClosingSection';
-import MusicPlayer from './components/MusicPlayer';
-import NavigationBar from './components/NavigationBar';
-import FloatingParticles from './components/FloatingParticles';
-import SectionDivider from './components/SectionDivider';
-import bgTexture from './assets/bg-texture.png';
 
-export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
+import FloatingMusic from './components/FloatingMusic';
+import FloatingNavbar from './components/FloatingNavbar';
+
+import { invitationData } from './data/invitationData';
+import WaveDivider from './sections/WaveDivider';
+
+function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [guestName, setGuestName] = useState('');
 
+  const audioRef = useRef(null);
+
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const to = params.get('to');
+    // Get guest name from URL parameter ?to=Nama+Tamu
+    const urlParams = new URLSearchParams(window.location.search);
+    const to = urlParams.get('to');
     if (to) {
       setGuestName(to);
     }
 
-    // Splash screen timer - tunggu 2.5 detik agar semua aset dimuat
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500);
+    // Initialize audio
+    audioRef.current = new Audio(invitationData.music.src);
+    audioRef.current.loop = true;
 
-    return () => clearTimeout(timer);
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
   }, []);
 
-  const handleOpen = () => {
+  const handleOpenInvitation = () => {
     setIsOpen(true);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    
+    // Play music when invitation is opened
+    if (audioRef.current) {
+      audioRef.current.play()
+        .then(() => setIsMusicPlaying(true))
+        .catch(err => console.log('Autoplay prevented:', err));
+    }
+  };
+
+  const toggleMusic = () => {
+    if (isMusicPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+    setIsMusicPlaying(!isMusicPlaying);
   };
 
   return (
-    <div className="min-h-screen text-brown-dark font-sans relative overflow-x-hidden">
-      {/* Fixed Background Layer to prevent jumpy behavior on mobile */}
-      <div
-        className="fixed top-0 left-0 w-full h-[100lvh] z-[-1] bg-cover bg-[center_15%] bg-no-repeat opacity-40"
-        style={{ backgroundImage: `url(${bgTexture})` }}
-      />
-
-      {/* Animasi Partikel Kelopak Gugur */}
-      <FloatingParticles />
-
-      {/* Splash Screen */}
+    <div className="app-wrapper">
       <AnimatePresence>
-        {isLoading && <SplashScreen />}
-      </AnimatePresence>
-
-      {/* Opening Screen */}
-      <AnimatePresence>
-        {!isLoading && !isOpen && (
-          <OpeningScreen guestName={guestName} onOpen={handleOpen} />
+        {!isOpen && (
+          <OpeningScreen
+            onOpen={handleOpenInvitation}
+            guestName={guestName}
+          />
         )}
       </AnimatePresence>
 
-      {isOpen && (
-        <>
-          <MusicPlayer />
-          <NavigationBar />
-          <div className="relative z-0 scroll-smooth">
-            <HeroSection />
-            <SectionDivider />
-            <PrayerSection />
-            <CoupleSection />
-            <SectionDivider />
-            <EventDetails />
-            <CountdownSection />
-            {/* <SectionDivider /> */}
-            {/* <StorySection /> */}
-            {/* <SectionDivider /> */}
-            {/* <GallerySection /> */}
-            <SectionDivider />
-            <GiftSection />
-            <RSVPSection />
-            <WishesSection />
-            <ClosingSection />
-          </div>
-        </>
-      )}
+      <main className={`main-content ${isOpen ? 'main-content--visible' : ''}`}>
+        <HeroSection />
+        <CoupleSection />
+        <WaveDivider type="cream-to-navy" />
+        <QuoteSection />
+        <EventSection />
+        <WaveDivider type="cream-to-navy" />
+        <GiftSection />
+        <WishesSection />
+        <ClosingSection />
+      </main>
+
+      {/* Global Elements - Only visible when invitation is opened */}
+      <div className={`global-elements ${isOpen ? 'global-elements--visible' : ''}`}>
+        <FloatingMusic isPlaying={isMusicPlaying} onToggle={toggleMusic} />
+        <FloatingNavbar />
+      </div>
     </div>
   );
 }
+
+export default App;

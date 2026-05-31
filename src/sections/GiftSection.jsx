@@ -1,138 +1,178 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Copy, Check, Gift, MapPin } from 'lucide-react';
+import { invitationData } from '../data/invitationData';
+import chipImage from '../assets/images/chip-atm.png';
+import bcaLogo from '../assets/images/BCA_logo.png';
+// Import logo lain jika ada, misalnya danaLogo
+import danaLogo from '../assets/images/DANA_logo.png';
 
-export default function GiftSection() {
-  const [copiedId, setCopiedId] = useState(null);
+// Map bank names to logo imports
+const bankLogos = {
+  BCA: bcaLogo,
+  DANA: danaLogo,
+};
 
-  const bankAccounts = [
-    {
-      id: 1,
-      bankName: 'BSI',
-      accountNumber: '7220510624',
-      accountHolder: 'Juliana Kus Inggardini',
-      icon: '🏦'
-    },
-    {
-      id: 2,
-      bankName: 'BCA',
-      accountNumber: '3761381847',
-      accountHolder: 'Rexi Faza Juliansyah',
-      icon: '🏦'
-    }
-  ];
+const GiftSection = () => {
+  const { gift, meta } = invitationData;
+  const [isOpen, setIsOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [showToast, setShowToast] = useState(false);
 
-  const handleCopy = (id, text) => {
-    navigator.clipboard.writeText(text);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
+  useEffect(() => {
+    const handleOpenGift = () => setIsOpen(true);
+    window.addEventListener('openGift', handleOpenGift);
+    return () => window.removeEventListener('openGift', handleOpenGift);
+  }, []);
+
+  const handleCopy = (text, label) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setToastMessage(`Nomor ${label} berhasil disalin!`);
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 2500);
+    }).catch(() => {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setToastMessage(`Nomor ${label} berhasil disalin!`);
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 2500);
+    });
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
-  };
-
-  const itemVariants = {
+  const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
   };
 
   return (
-    <section className="py-24 px-6 md:px-12 relative overflow-hidden" id="gift">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={containerVariants}
-        className="max-w-4xl mx-auto text-center"
-      >
-        <motion.div variants={itemVariants} className="mb-12">
-          <Gift className="w-10 h-10 mx-auto text-brown-soft mb-4" />
-          <h2 className="text-4xl md:text-5xl font-serif text-brown-dark mb-4">Kado Digital</h2>
-          <p className="text-brown-dark max-w-lg mx-auto">
-            Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika Anda ingin memberikan tanda kasih, Anda dapat memberikannya melalui:
-          </p>
-        </motion.div>
+    <section className="gift-section" id="gift">
+      <div className="relative z-10">
+        <motion.h2
+          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+          className="gift-title"
+        >
+          Amplop Digital
+        </motion.h2>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {bankAccounts.map((account) => (
-            <motion.div
-              key={account.id}
-              variants={itemVariants}
-              className="glass-panel p-8 relative group hover:shadow-2xl transition-all duration-500"
+        <motion.p
+          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+          className="gift-text"
+        >
+          {meta.giftText}
+        </motion.p>
+
+        <motion.button
+          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+          className="btn-outline-white"
+          onClick={() => setIsOpen(!isOpen)}
+          id="btn-gift-toggle"
+          style={{ marginBottom: '24px' }}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="20 12 20 22 4 22 4 12" />
+            <rect x="2" y="7" width="20" height="5" />
+            <line x1="12" y1="22" x2="12" y2="7" />
+            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
+            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+          </svg>
+          Klik Disini
+        </motion.button>
+
+        {/* Collapsible bank cards */}
+        <div className={`gift-cards-wrapper ${isOpen ? 'gift-cards-wrapper--open' : ''}`}>
+          {gift.banks.map((bank, index) => (
+            <div
+              className="gift-bank-card"
+              key={bank.name}
             >
-              <div className="text-left">
-                <div className="flex justify-between items-start mb-6">
-                  <span className="text-2xl font-bold text-brown-dark italic">{account.bankName}</span>
-                  <span className="text-2xl">{account.icon}</span>
+              {/* Real ATM chip image */}
+              <img
+                src={chipImage}
+                alt="Chip"
+                className="gift-bank-chip-img"
+              />
+
+              {/* Real bank logo or text fallback */}
+              {bankLogos[bank.name] ? (
+                <img
+                  src={bankLogos[bank.name]}
+                  alt={bank.name}
+                  className="gift-bank-logo"
+                />
+              ) : (
+                <div className="gift-bank-logo flex items-center h-full">
+                  <span className="text-xl font-bold italic text-white/90">{bank.name}</span>
                 </div>
+              )}
 
-                <div className="mb-6">
-                  <p className="text-xs uppercase tracking-widest text-brown-soft mb-1 font-medium">Nomor Rekening</p>
-                  <p className="text-2xl font-medium tracking-wider text-brown-dark font-sans">{account.accountNumber}</p>
-                </div>
+              {/* Account number */}
+              <p className="gift-bank-number">{bank.accountNumber}</p>
 
-                <div className="mb-8">
-                  <p className="text-xs uppercase tracking-widest text-brown-soft mb-1 font-medium">Atas Nama</p>
-                  <p className="text-lg text-brown-dark font-serif">{account.accountHolder}</p>
-                </div>
+              {/* Account holder */}
+              <p className="gift-bank-holder">{bank.accountHolder}</p>
 
-                <button
-                  onClick={() => handleCopy(account.id, account.accountNumber)}
-                  className="w-full flex items-center justify-center gap-2 py-3 bg-brown-dark text-cream rounded-xl hover:bg-brown-dark/90 transition-all group overflow-hidden relative"
-                >
-                  <AnimatePresence mode="wait">
-                    {copiedId === account.id ? (
-                      <motion.div
-                        key="copied"
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -20, opacity: 0 }}
-                        className="flex items-center gap-2"
-                      >
-                        <Check className="w-4 h-4" />
-                        <span className="text-xs font-medium uppercase tracking-wider">Tersalin</span>
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        key="copy"
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -20, opacity: 0 }}
-                        className="flex items-center gap-2"
-                      >
-                        <Copy className="w-4 h-4" />
-                        <span className="text-xs font-medium uppercase tracking-wider">Salin Nomor</span>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div variants={itemVariants} className="glass-panel p-8 md:p-12 max-w-2xl mx-auto">
-          <div className="flex flex-col items-center gap-4">
-            <MapPin className="w-8 h-8 text-brown-soft" />
-            <div>
-              <p className="text-xs uppercase tracking-widest text-brown-soft mb-2 font-medium">Alamat Pengiriman Kado Fisik</p>
-              <p className="text-brown-dark text-lg leading-relaxed font-serif italic mb-4">
-                Jl. Contoh Alamat Pernikahan No. 123, <br />
-                Kecamatan Blimbing, Kota Malang, Jawa Timur
-              </p>
+              {/* Copy button */}
               <button
-                onClick={() => handleCopy('address', 'Jl. Contoh Alamat Pernikahan No. 123, Kecamatan Blimbing, Kota Malang')}
-                className="inline-flex items-center gap-2 text-sm text-brown-soft hover:text-brown-dark transition-colors font-medium"
+                className="btn-copy"
+                onClick={() => handleCopy(bank.accountNumber, bank.name)}
+                id={`btn-copy-${bank.name.toLowerCase()}`}
               >
-                {copiedId === 'address' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                {copiedId === 'address' ? 'Alamat Tersalin' : 'Salin Alamat'}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </svg>
+                Copy
               </button>
             </div>
+          ))}
+
+          {/* Gift address card */}
+          <div className="gift-address-card">
+            <h4>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{ width: '16px', height: '16px', display: 'inline', verticalAlign: 'middle', marginRight: '6px' }}
+              >
+                <polyline points="20 12 20 22 4 22 4 12" />
+                <rect x="2" y="7" width="20" height="5" />
+                <line x1="12" y1="22" x2="12" y2="7" />
+                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
+                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+              </svg>
+              Kirim Hadiah
+            </h4>
+            <p>{gift.address.name}</p>
+            <p>No. HP: {gift.address.phone}</p>
+            <p style={{ whiteSpace: 'pre-line' }}>{gift.address.detail}</p>
+            <button
+              className="btn-copy"
+              onClick={() => handleCopy(gift.address.detail, 'Alamat')}
+              style={{ marginTop: '12px' }}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+              Copy Alamat
+            </button>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
+
+      {/* Toast notification */}
+      <div className={`toast ${showToast ? 'toast--visible' : ''}`}>
+        ✅ {toastMessage}
+      </div>
     </section>
   );
-}
+};
+
+export default GiftSection;

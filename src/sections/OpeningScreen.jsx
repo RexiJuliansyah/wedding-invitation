@@ -1,47 +1,89 @@
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MailOpen } from 'lucide-react';
-import bgTexture from '../assets/bg-texture.png';
+import { FloralCornerStack } from '../components/FloralOrnaments';
+import coverImage from '../assets/bg-texture.png';
+import { invitationData } from '../data/invitationData';
 
-export default function OpeningScreen({ guestName, onOpen }) {
+const OpeningScreen = ({ onOpen, guestName }) => {
   return (
     <motion.div
       key="opening-screen"
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, y: '-100%' }}
-      transition={{ duration: 1.2, ease: [0.83, 0, 0.39, 1] }}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center text-center overflow-hidden"
+      exit={{ y: '-100%', opacity: 0 }}
+      transition={{ duration: 1, ease: [0.65, 0, 0.35, 1] }}
+      className="opening-section"
     >
-      {/* Fixed Background Layer for Opening Screen */}
-      <div
-        className="fixed top-0 left-0 w-full h-[100lvh] z-[-1] bg-cover bg-[center_15%] bg-no-repeat opacity-40"
-        style={{ backgroundImage: `url(${bgTexture})` }}
-      />
+      {/* Background Photo */}
+      <div className="opening-bg">
+        <img
+          src={coverImage}
+          alt={`${invitationData.couple.groomNickname} & ${invitationData.couple.brideNickname}`}
+          loading="eager"
+        />
+      </div>
 
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1, delay: 0.2 }}
-        className="relative z-10 flex flex-col items-center p-8 max-w-md mx-auto"
-      >
-        <p className="text-sm tracking-widest uppercase mb-4 text-brown-soft">The Wedding Of</p>
-        <h1 className="text-6xl mb-6 text-brown-dark italic font-serif">Julia & Rexi</h1>
+      {/* Gradient overlay from bottom */}
+      <div className="opening-gradient" />
 
-        <div className="my-8 mb-12">
-          <p className="text-sm mb-2 text-brown-dark/70">Kepada Yth.</p>
-          <h2 className="text-2xl font-serif text-brown-dark border-b border-brown-soft/50 inline-block pb-1 min-w-[200px]">
-            {guestName || 'Tamu Undangan'}
-          </h2>
-        </div>
-
-        <button
-          onClick={onOpen}
-          className="group relative inline-flex items-center justify-center px-8 py-3 bg-brown-dark text-cream rounded-full overflow-hidden transition-transform active:scale-95"
+      {/* Content */}
+      <div className="opening-content">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="opening-label"
         >
-          <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></span>
-          <MailOpen className="w-4 h-4 mr-2" />
-          <span className="text-sm tracking-widest uppercase">Buka Undangan</span>
-        </button>
-      </motion.div>
+          The Wedding of
+        </motion.p>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+          className="opening-names"
+        >
+          {invitationData.couple.brideNickname} & {invitationData.couple.groomNickname}
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          className="opening-guest-label"
+        >
+          Kepada Bapak/Ibu/Saudara/i
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.8 }}
+          className="opening-guest-name"
+        >
+          {guestName || 'Tamu Undangan'}
+        </motion.p>
+
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9, duration: 0.8 }}
+          className="btn-open"
+          onClick={onOpen}
+          id="btn-open-invitation"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+          Buka Undangan
+        </motion.button>
+      </div>
+
+      {/* Bottom stacked corners */}
+      <FloralCornerStack position="bottom-left" />
+      <FloralCornerStack position="bottom-right" />
     </motion.div>
   );
-}
+};
+
+export default OpeningScreen;

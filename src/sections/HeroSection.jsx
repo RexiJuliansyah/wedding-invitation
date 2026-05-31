@@ -1,45 +1,169 @@
+import React from 'react';
 import { motion } from 'framer-motion';
-import brideImg from '../assets/bride.jpeg';
-import groomImg from '../assets/groom.jpeg';
+import { FloralCornerStack, FloralAccent, ornaments } from '../components/FloralOrnaments';
+import { useCountdown } from '../hooks/useCountdown';
+import { invitationData } from '../data/invitationData';
+import heroImage from '../assets//bg-texture.png';
 
-export default function HeroSection() {
+const HeroSection = () => {
+  const { days, hours, minutes, seconds } = useCountdown(invitationData.event.weddingDate);
+
+  const handleSaveTheDate = () => {
+    const event = invitationData.event.akad;
+    const startDate = '20260711T010000Z'; // UTC time (08:00 WIB - 7 = 01:00)
+    const endDate = '20260711T050000Z';
+
+    const icsContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Wedding//Julia & Rexi//ID',
+      'BEGIN:VEVENT',
+      `DTSTART:${startDate}`,
+      `DTEND:${endDate}`,
+      `SUMMARY:Pernikahan ${invitationData.couple.groomNickname} & ${invitationData.couple.brideNickname}`,
+      `DESCRIPTION:${event.venue}\\n${event.address.replace(/\n/g, '\\n')}`,
+      `LOCATION:${event.venue}, ${event.address.replace(/\n/g, ', ')}`,
+      'END:VEVENT',
+      'END:VCALENDAR',
+    ].join('\r\n');
+
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'wedding-julia-rexi.ics';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+  };
+
   return (
-    <section className="relative min-h-[100svh] flex flex-col items-center justify-center p-8 text-center overflow-hidden" id="home">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1 }}
-        className="w-full max-w-lg z-10 glass-panel p-8 md:p-12"
-      >
-        <p className="text-sm tracking-widest text-brown-dark mb-4 group uppercase">
+    <section className="hero-section" id="home">
+      {/* Watercolor stains */}
+      <div className="watercolor-stain watercolor-stain--top-right" />
+      <div className="watercolor-stain watercolor-stain--bottom-left" />
+
+      {/* STACKED floral corners */}
+      <FloralCornerStack position="top-left" />
+      <FloralCornerStack position="top-right" />
+
+      {/* Content */}
+      <div className="relative z-10 w-full">
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="hero-subtitle"
+        >
+          THE WEDDING OF
+        </motion.p>
+
+        {/* Oval Photo Frame */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, delay: 0.2 }}
+          className="hero-photo-wrapper"
+        >
+          <div className="hero-photo-frame">
+            <img
+              src={heroImage}
+              alt={`${invitationData.couple.groomNickname} & ${invitationData.couple.brideNickname}`}
+              loading="eager"
+            />
+          </div>
+          <FloralAccent className="hero-photo-floral" />
+          <img
+            src={ornaments.bouquetUpward}
+            alt=""
+            aria-hidden="true"
+            className="hero-photo-floral-left wind-sway-slow"
+            loading="lazy"
+          />
+        </motion.div>
+
+        {/* Couple Names */}
+        <motion.h2
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="hero-names"
+        >
+          {invitationData.couple.brideNickname} &amp; {invitationData.couple.groomNickname}
+        </motion.h2>
+
+        {/* Tagline */}
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="hero-tagline"
+        >
+          Kami berharap Anda menjadi bagian dari hari istimewa kami.
+        </motion.p>
+
+        {/* Countdown Timer */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="countdown-wrapper"
+        >
+          <div className="countdown-item">
+            <span className="countdown-number">{days}</span>
+            <span className="countdown-label">Hari</span>
+          </div>
+          <div className="countdown-item">
+            <span className="countdown-number">{hours}</span>
+            <span className="countdown-label">Jam</span>
+          </div>
+          <div className="countdown-item">
+            <span className="countdown-number">{minutes}</span>
+            <span className="countdown-label">Menit</span>
+          </div>
+          <div className="countdown-item">
+            <span className="countdown-number">{seconds}</span>
+            <span className="countdown-label">Detik</span>
+          </div>
+        </motion.div>
+
+        {/* Date */}
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="hero-date"
+        >
+          {invitationData.event.akad.date}
+        </motion.p>
+
+        {/* Save The Date Button */}
+        <motion.button
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="btn-save-date"
+          onClick={handleSaveTheDate}
+          id="btn-save-the-date"
+        >
           Save The Date
-        </p>
-
-        {/* Illustrations container */}
-        <div className="w-full mb-10 flex justify-center items-center gap-6 md:gap-8">
-          <motion.img
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            src={brideImg}
-            alt="Bride"
-            className="w-32 h-32 md:w-44 md:h-44 object-cover object-top rounded-full border-4 border-cream-light shadow-md"
-          />
-          <motion.img
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            src={groomImg}
-            alt="Groom"
-            className="w-32 h-32 md:w-44 md:h-44 object-cover object-top rounded-full border-4 border-cream-light shadow-md"
-          />
-        </div>
-
-        <h1 className="text-5xl md:text-6xl font-serif text-brown-dark mb-2">Julia & Rexi</h1>
-        <p className="italic text-brown-soft text-xl font-serif mb-6">#AkhirnyaJulianSyahinJulia</p>
-
-        <div className="w-px h-12 bg-brown-soft mx-auto mb-6"></div>
-        <p className="tracking-widest uppercase font-medium">11 . 07 . 2026</p>
-      </motion.div>
+        </motion.button>
+      </div>
     </section>
   );
-}
+};
+
+export default HeroSection;

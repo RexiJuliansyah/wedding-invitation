@@ -1,129 +1,138 @@
+import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Calendar, Clock, CalendarPlus } from 'lucide-react';
+import { FloralCornerStack } from '../components/FloralOrnaments';
+import { invitationData } from '../data/invitationData';
 
-export default function EventDetails() {
+const generateICS = (event, coupleName) => {
+  const weddingISO = invitationData.event.weddingDate; 
+  const startDate = new Date(weddingISO);
+
+  if (event.title === 'Resepsi') {
+    startDate.setHours(11, 0, 0);
+  }
+
+  const endDate = new Date(startDate);
+  endDate.setHours(endDate.getHours() + 2);
+
+  const toICSDate = (date) => {
+    const utc = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    return utc.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  };
+
+  const icsContent = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Wedding//Julia & Rexi//ID',
+    'BEGIN:VEVENT',
+    `DTSTART:${toICSDate(startDate)}`,
+    `DTEND:${toICSDate(endDate)}`,
+    `SUMMARY:${event.title} - ${coupleName}`,
+    `DESCRIPTION:${event.venue}\\n${event.address.replace(/\n/g, '\\n')}`,
+    `LOCATION:${event.venue}, ${event.address.replace(/\n/g, ', ')}`,
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ].join('\r\n');
+
+  const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${event.title.toLowerCase().replace(/\s+/g, '-')}-${coupleName.toLowerCase().replace(/\s+/g, '-')}.ics`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+};
+
+const EventCard = ({ akad, resepsi, coupleName }) => {
+  const handleOpenMaps = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   return (
-    <section className="py-24 px-6 md:px-12 relative" id="event">
-      <div className="max-w-4xl mx-auto text-center mb-16">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-sm tracking-widest uppercase text-brown-soft mb-2"
+    <motion.div 
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+      className="event-card"
+    >
+      <h3 className="event-card-title">{akad.title} & {resepsi.title}</h3>
+      <p className="event-card-date">{akad.date}</p>
+      
+      <div style={{ margin: '16px 0' }}>
+        <p className="event-card-time" style={{ marginBottom: '4px' }}>
+          <strong>{akad.title}:</strong> {akad.time}
+        </p>
+        <p className="event-card-time">
+          <strong>{resepsi.title}:</strong> {resepsi.time}
+        </p>
+      </div>
+
+      <p className="event-card-venue">Tempat: {akad.venue}</p>
+      <p className="event-card-address" style={{ whiteSpace: 'pre-line' }}>{akad.address}</p>
+
+      <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <button
+          className="btn-location"
+          onClick={() => handleOpenMaps(akad.mapsUrl)}
         >
-          Time & Place
-        </motion.p>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          Lihat Lokasi
+        </button>
+
+        <button
+          className="btn-location"
+          onClick={() => {
+            generateICS(akad, coupleName);
+            setTimeout(() => generateICS(resepsi, coupleName), 500);
+          }}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+          Simpan ke Kalender
+        </button>
+      </div>
+    </motion.div>
+  );
+};
+
+const EventSection = () => {
+  const { event, couple } = invitationData;
+  const coupleName = `${couple.brideNickname} & ${couple.groomNickname}`;
+
+  return (
+    <section className="event-section" id="event">
+      <div className="watercolor-stain watercolor-stain--center" />
+
+      <FloralCornerStack position="top-left" />
+      <FloralCornerStack position="top-right" />
+
+      <div className="relative z-10">
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-4xl md:text-5xl font-serif text-brown-dark"
+          transition={{ duration: 0.8 }}
+          className="event-section-title"
         >
-          Event Details
+          Waktu & Tempat
         </motion.h2>
+
+        <EventCard akad={event.akad} resepsi={event.resepsi} coupleName={coupleName} />
       </div>
 
-      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
-        {/* Akad Card */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="glass-panel p-8 md:p-10 flex flex-col items-center text-center relative overflow-hidden"
-        >
-          <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brown-soft/40 via-brown-dark/40 to-brown-soft/40"></div>
-
-          <h3 className="text-3xl font-serif text-brown-dark mb-8">Akad Nikah</h3>
-
-          <div className="space-y-6 mb-8 w-full">
-            <div className="flex flex-col items-center">
-              <Calendar className="w-5 h-5 text-brown-soft mb-2" />
-              <p className="font-medium text-brown-dark">Sabtu, 11 Juli 2026</p>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <Clock className="w-5 h-5 text-brown-soft mb-2" />
-              <p className="font-medium text-brown-dark">08:00 - 10:00 WIB</p>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <MapPin className="w-5 h-5 text-brown-soft mb-2" />
-              <p className="font-bold text-brown-dark mb-1">Ponyo® Resto & Wedding</p>
-              <p className="text-sm text-brown-dark/70"><span className="font-semibold block mb-1">Aula Atas</span>Jl. Raya Cinunuk No.186, Cinunuk, Kec. Cileunyi<br />Kabupaten Bandung, Jawa Barat</p>
-            </div>
-          </div>
-
-          <div className="mt-auto flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-            <a
-              href="https://maps.google.com/?q=Ponyo+Resto+Cinunuk+Cileunyi"
-              target="_blank"
-              rel="noreferrer"
-              className="px-6 py-2 border border-brown-dark text-brown-dark hover:bg-brown-dark hover:text-cream rounded-full transition-colors text-sm tracking-wide text-center"
-            >
-              Open Map
-            </a>
-            <a
-              href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+Julia+%26+Rexi+%E2%80%94+Akad+Nikah&dates=20260711T010000Z/20260711T030000Z&details=Akad+Nikah+Julia+%26+Rexi+di+Ponyo+Resto+%26+Wedding&location=Ponyo+Resto+%26+Wedding%2C+Jl.+Raya+Cinunuk+No.186%2C+Bandung&sf=true"
-              target="_blank"
-              rel="noreferrer"
-              className="px-6 py-2 bg-brown-dark text-cream hover:bg-brown-dark/90 rounded-full transition-colors text-sm tracking-wide flex items-center justify-center gap-2"
-            >
-              <CalendarPlus className="w-4 h-4" /> Save Date
-            </a>
-          </div>
-        </motion.div>
-
-        {/* Resepsi Card */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="glass-panel p-8 md:p-10 flex flex-col items-center text-center relative overflow-hidden"
-        >
-          <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brown-soft/40 via-brown-dark/40 to-brown-soft/40"></div>
-
-          <h3 className="text-3xl font-serif text-brown-dark mb-8">Resepsi</h3>
-
-          <div className="space-y-6 mb-8 w-full">
-            <div className="flex flex-col items-center">
-              <Calendar className="w-5 h-5 text-brown-soft mb-2" />
-              <p className="font-medium text-brown-dark">Sabtu, 11 Juli 2026</p>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <Clock className="w-5 h-5 text-brown-soft mb-2" />
-              <p className="font-medium text-brown-dark">11:00 - 13:30 WIB</p>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <MapPin className="w-5 h-5 text-brown-soft mb-2" />
-              <p className="font-bold text-brown-dark mb-1">Ponyo® Resto & Wedding</p>
-              <p className="text-sm text-brown-dark/70"><span className="font-semibold block mb-1">Aula Atas</span>Jl. Raya Cinunuk No.186, Cinunuk, Kec. Cileunyi<br />Kabupaten Bandung, Jawa Barat</p>
-            </div>
-          </div>
-
-          <div className="mt-auto flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-            <a
-              href="https://maps.google.com/?q=Ponyo+Resto+Cinunuk+Cileunyi"
-              target="_blank"
-              rel="noreferrer"
-              className="px-6 py-2 border border-brown-dark text-brown-dark hover:bg-brown-dark hover:text-cream rounded-full transition-colors text-sm tracking-wide text-center"
-            >
-              Open Map
-            </a>
-            <a
-              href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+Julia+%26+Rexi+%E2%80%94+Resepsi&dates=20260711T040000Z/20260711T063000Z&details=Resepsi+Pernikahan+Julia+%26+Rexi+di+Ponyo+Resto+%26+Wedding&location=Ponyo+Resto+%26+Wedding%2C+Jl.+Raya+Cinunuk+No.186%2C+Bandung&sf=true"
-              target="_blank"
-              rel="noreferrer"
-              className="px-6 py-2 bg-brown-dark text-cream hover:bg-brown-dark/90 rounded-full transition-colors text-sm tracking-wide flex items-center justify-center gap-2"
-            >
-              <CalendarPlus className="w-4 h-4" /> Save Date
-            </a>
-          </div>
-        </motion.div>
-      </div>
-
+      <FloralCornerStack position="bottom-left" />
+      <FloralCornerStack position="bottom-right" />
     </section>
   );
-}
+};
+
+export default EventSection;

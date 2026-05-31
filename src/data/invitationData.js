@@ -1,0 +1,102 @@
+// ============================================================
+// Wedding Data — Centralized Configuration
+// ============================================================
+
+export const invitationData = {
+  // Couple Information
+  couple: {
+    groomNickname: 'Rexi',
+    brideNickname: 'Julia',
+    groomFullName: 'Rexi Faza Juliansyah',
+    brideFullName: 'Juliana Kus Inggardini',
+    groomParents: { father: 'Bapak Ifdial', mother: 'Ibu Lindawati' },
+    brideParents: { father: 'Bapak Sugito', mother: 'Ibu Endang Suningsih' },
+    groomIg: 'https://www.instagram.com/rexijuliansyah',
+    brideIg: 'https://www.instagram.com/juliainggardini',
+  },
+
+  // Event Details
+  event: {
+    akad: {
+      title: 'Akad',
+      date: 'Sabtu, 11 Juli 2026',
+      time: '08:00 - 10:00 WIB',
+      venue: 'Ponyo® Resto & Wedding',
+      address: 'Aula Atas\nJl. Raya Cinunuk No.186, Cinunuk, Kec. Cileunyi\nKabupaten Bandung, Jawa Barat',
+      mapsUrl: 'https://maps.google.com/?q=Ponyo+Resto+Cinunuk+Cileunyi',
+    },
+    resepsi: {
+      title: 'Resepsi',
+      date: 'Sabtu, 11 Juli 2026',
+      time: '11:00 - 13:30 WIB',
+      venue: 'Ponyo® Resto & Wedding',
+      address: 'Aula Atas\nJl. Raya Cinunuk No.186, Cinunuk, Kec. Cileunyi\nKabupaten Bandung, Jawa Barat',
+      mapsUrl: 'https://maps.google.com/?q=Ponyo+Resto+Cinunuk+Cileunyi',
+    },
+    weddingDate: '2026-07-11T08:00:00+07:00', // ISO format for countdown
+  },
+
+  // Love Story Timeline
+  story: [
+    {
+      title: 'Awal Cerita',
+      description:
+        'Kami bertemu dan saling mengenal, mengawali kisah dengan tawa dan obrolan ringan yang perlahan berubah menjadi rasa nyaman.',
+    },
+    {
+      title: 'Lamaran',
+      description:
+        'Dengan niat yang tulus dan disaksikan oleh keluarga tercinta, kami melangkah ke jenjang yang lebih serius untuk saling mengikat janji.',
+    },
+    {
+      title: 'Pernikahan',
+      description:
+        'Bismillah, 11 Juli 2026 kami akan mengikat janji suci disaksikan orang tua dan sahabat, memohon rahmat Allah agar hari-hari setelahnya menjadi ruang belajar untuk saling menguatkan dan mengasihi.',
+    },
+  ],
+
+  // Gift / Amplop Digital
+  gift: {
+    banks: [
+      { name: 'BCA', accountNumber: '3761381847', accountHolder: 'REXI FAZA JULIANSYAH' },
+      { name: 'BSI', accountNumber: '7220510624', accountHolder: 'JULIANA KUS INGGARDINI' },
+    ],
+    address: {
+      name: 'Rexi / Julia',
+      phone: '081234567890',
+      detail: 'Jl. Contoh Alamat Pernikahan No. 123,\nKecamatan Blimbing, Kota Malang, Jawa Timur',
+    },
+  },
+
+  // Gallery (currently missing actual files, we will use placeholders or empty for now, but will set up the structure)
+  gallery: [
+    { id: 1, alt: 'Pre-wedding 1' },
+    { id: 2, alt: 'Pre-wedding 2' },
+    { id: 3, alt: 'Pre-wedding 3' },
+    { id: 4, alt: 'Pre-wedding 4' },
+  ],
+
+  // Music
+  music: {
+    src: '/music.m4a',
+  },
+
+  // Meta & Texts
+  meta: {
+    whatsappNumber: '6281234567890', // Replace with actual if needed
+    instagramUrl: 'https://www.instagram.com/rexijuliansyah', // Couple's joint IG or main contact
+    hashtag: '#AkhirnyaJulianSyahinJulia',
+    quranQuote: {
+      text: '"Dan segala sesuatu Kami ciptakan berpasang-pasangan agar kamu mengingat (kebesaran Allah)."',
+      source: '(QS. Az Zariyat: 49)',
+    },
+    invitationText:
+      'Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i serta kerabat sekalian untuk menghadiri acara pernikahan kami.',
+    closingText:
+      'Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu. Atas kehadiran dan doa restunya, kami mengucapkan terima kasih.',
+    galleryText:
+      'Tidak ada yang spesial dalam cerita kami. Tapi kami sangat spesial untuk satu sama lain. Dan Kami bersyukur, dipertemukan Allah diwaktu terbaik, Kini kami menanti hari istimewa kami.',
+    giftText:
+      'Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless melalui:',
+  },
+};

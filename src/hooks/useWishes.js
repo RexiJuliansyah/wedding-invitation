@@ -1,13 +1,25 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
+// Mock data as fallback
+const initialMockWishes = [
+  { id: 1, name: 'John Doe', attendance: 'Hadir', message: 'Selamat menempuh hidup baru!', created_at: new Date().toISOString() },
+  { id: 2, name: 'Jane Smith', attendance: 'Tidak Hadir', message: 'Maaf tidak bisa hadir, doa terbaik untuk kalian.', created_at: new Date().toISOString() }
+];
+
 export function useWishes() {
   const [wishes, setWishes] = useState([]);
+  const hasSupabase = Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY);
 
   const loadWishes = async () => {
-    // Return early if no supabase url/key is set (prevents crashing if env not filled)
-    if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) {
-      console.warn('Supabase URL/Key missing. Check .env.local');
+    if (!hasSupabase) {
+      console.warn('Supabase URL/Key missing. Using local fallback.');
+      const localWishes = localStorage.getItem('localWishes');
+      if (localWishes) {
+        setWishes(JSON.parse(localWishes));
+      } else {
+        setWishes(initialMockWishes);
+      }
       return;
     }
 
@@ -29,9 +41,7 @@ export function useWishes() {
   useEffect(() => {
     loadWishes();
 
-    // Pastikan env variable ada sebelum mencoba subscribe
-    if (import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY) {
-      // Gunakan nama channel unik (dengan string acak) agar tidak bertabrakan saat React Strict Mode berjalan 2 kali
+    if (hasSupabase) {
       const channelName = 'wishes-channel-' + Math.random().toString(36).substring(7);
       
       const subscription = supabase
@@ -40,9 +50,7 @@ export function useWishes() {
           'postgres_changes',
           { event: 'INSERT', schema: 'public', table: 'wishes' },
           (payload) => {
-            // Add the new wish to the top of the list
             setWishes((currentWishes) => {
-              // Pencegah duplikat karena event sinkron lokal
               if (currentWishes.some(w => w.id === payload.new.id)) return currentWishes;
               return [payload.new, ...currentWishes];
             });
@@ -50,7 +58,6 @@ export function useWishes() {
         )
         .subscribe();
 
-      // Tambahkan event listener lokal sebagai fallback jika realtime mati
       window.addEventListener('wishes_updated', loadWishes);
 
       return () => {
@@ -61,12 +68,16 @@ export function useWishes() {
   }, []);
 
   const addWish = async (wish) => {
-    if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) {
-      console.warn('Supabase URL/Key missing. Check .env.local');
+    if (!hasSupabase) {
+      // Local fallback
+      const newWish = { ...wish, created_at: new Date().toISOString(), id: Date.now() };
+      const currentWishes = localStorage.getItem('localWishes') ? JSON.parse(localStorage.getItem('localWishes')) : initialMockWishes;
+      const updatedWishes = [newWish, ...currentWishes];
+      setWishes(updatedWishes);
+      localStorage.setItem('localWishes', JSON.stringify(updatedWishes));
       return;
     }
 
-    // Remove 'id' if frontend added it because Supabase will auto-generate it
     const { id, ...wishData } = wish;
     
     const { error } = await supabase
@@ -77,7 +88,6 @@ export function useWishes() {
       console.error('Error adding wish:', error);
       throw error;
     } else {
-      // Panggil event lokal agar komponen lain (seperti WishesSection) menyadari ada data baru
       window.dispatchEvent(new Event('wishes_updated'));
       loadWishes();
     }

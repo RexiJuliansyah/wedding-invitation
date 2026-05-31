@@ -1,74 +1,82 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
-import brideImg from '../assets/bride.jpeg';
-import groomImg from '../assets/groom.jpeg';
+import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
+import { motion } from 'framer-motion';
+import { FloralCornerStack } from '../components/FloralOrnaments';
+import { invitationData } from '../data/invitationData';
+import image1 from '../assets/bride.jpeg';
+import image2 from '../assets/groom.jpeg';
+import image3 from '../assets/groom.jpeg';
 
-export default function GallerySection() {
-  const [selectedImage, setSelectedImage] = useState(null);
+const galleryImages = [image1, image2, image3, image1];
 
-  // Fallback using placeholder images since there's no real gallery images provided yet
-  const images = [
-    brideImg,
-    groomImg,
-    brideImg,
-    groomImg,
-    brideImg,
-    groomImg
-  ];
+const GallerySection = () => {
+  const { meta, gallery } = invitationData;
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  const openLightbox = (index) => setLightboxIndex(index);
+  const closeLightbox = () => setLightboxIndex(null);
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+  };
 
   return (
-    <section className="py-24 px-6 md:px-12 max-w-6xl mx-auto" id="gallery">
-      <div className="text-center mb-16">
-        <p className="text-sm tracking-widest uppercase text-brown-soft mb-2">Moments</p>
-        <h2 className="text-4xl md:text-5xl font-serif text-brown-dark">Our Gallery</h2>
+    <section className="gallery-section" id="gallery">
+      <div className="watercolor-stain watercolor-stain--top-right" />
+
+      <FloralCornerStack position="top-left" />
+      <FloralCornerStack position="top-right" />
+
+      <div className="relative z-10">
+        <motion.h2
+          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+          className="gallery-title"
+        >
+          Galeri Foto
+        </motion.h2>
+        <motion.p
+          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+          className="gallery-text"
+        >
+          {meta.galleryText}
+        </motion.p>
+
+        <motion.div
+          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+          className="gallery-grid"
+        >
+          {gallery.map((item, index) => (
+            <div
+              className="gallery-item"
+              key={item.id}
+              onClick={() => openLightbox(index)}
+            >
+              <img src={galleryImages[index % galleryImages.length]} alt={item.alt} loading="lazy" />
+            </div>
+          ))}
+        </motion.div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {images.map((src, index) => (
-           <motion.div
-            key={index}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            className={`cursor-pointer overflow-hidden rounded-xl shadow-sm ${index === 0 || index === 3 ? 'md:col-span-2 md:row-span-2' : ''}`}
-            onClick={() => setSelectedImage(src)}
-          >
-            <img 
-              src={src} 
-              alt={`Gallery ${index}`} 
-              className="w-full h-full object-cover aspect-square md:aspect-auto hover:scale-110 transition-transform duration-700" 
-              style={{ minHeight: index === 0 || index === 3 ? '100%' : '200px' }}
-            />
-          </motion.div>
-        ))}
-      </div>
-
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
-            onClick={() => setSelectedImage(null)}
-          >
-            <button className="absolute top-6 right-6 text-white bg-white/20 p-2 rounded-full hover:bg-white/40 transition">
-              <X className="w-6 h-6" />
-            </button>
-            <motion.img
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.8 }}
-              src={selectedImage}
-              alt="Enlarged gallery"
-              className="max-w-full max-h-[90vh] object-contain rounded-lg"
+      {typeof document !== 'undefined' && createPortal(
+        <div
+          className={`lightbox-overlay ${lightboxIndex !== null ? 'lightbox-overlay--visible' : ''}`}
+          onClick={closeLightbox}
+        >
+          <button className="lightbox-close" onClick={closeLightbox} aria-label="Close lightbox">✕</button>
+          {lightboxIndex !== null && (
+            <img
+              className="lightbox-image"
+              src={galleryImages[lightboxIndex % galleryImages.length]}
+              alt={gallery[lightboxIndex]?.alt || 'Gallery photo'}
               onClick={(e) => e.stopPropagation()}
             />
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </div>,
+        document.body
+      )}
     </section>
   );
-}
+};
+
+export default GallerySection;
