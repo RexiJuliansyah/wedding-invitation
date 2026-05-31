@@ -416,6 +416,62 @@ a {
   font-weight: 600;
 }
 
+/* Scroll Down Indicator */
+.scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 42px;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+  z-index: 20;
+}
+
+.scroll-indicator:hover {
+  opacity: 1;
+}
+
+.scroll-mouse {
+  width: 20px;
+  height: 32px;
+  border: 1.5px solid var(--navy);
+  border-radius: 12px;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.scroll-wheel {
+  width: 3px;
+  height: 6px;
+  background-color: var(--navy);
+  border-radius: 2px;
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollWheelAnim 1.5s infinite;
+}
+
+.scroll-text {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  color: var(--navy);
+  text-transform: uppercase;
+  animation: scrollPulse 2s infinite;
+}
+
+@keyframes scrollWheelAnim {
+  0% { top: 5px; opacity: 1; }
+  100% { top: 15px; opacity: 0; }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
 /* Oval Photo Frame */
 .hero-photo-wrapper {
   position: relative;

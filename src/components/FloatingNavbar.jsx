@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 const FloatingNavbar = () => {
-  const [activeSection, setActiveSection] = useState('hero');
-  const [isVisible, setIsVisible] = useState(true);
+  const [activeSection, setActiveSection] = useState('home');
+  const isVisible = activeSection !== 'home';
 
   // Smooth scroll to section
   const scrollTo = (id) => {

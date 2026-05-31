@@ -95,6 +95,20 @@ const HeroSection = () => {
         >
           11.07.2026
         </motion.p>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
+          className="scroll-indicator"
+          onClick={() => document.getElementById('couple')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <div className="scroll-mouse">
+            <div className="scroll-wheel"></div>
+          </div>
+          <span className="scroll-text">Scroll Down</span>
+        </motion.div>
       </div>
 
       <FloralCornerStack position="bottom-left" />
