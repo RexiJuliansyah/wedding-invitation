@@ -54,7 +54,7 @@ export const FloralCorner = ({ className = '', style = {}, variant = 'default' }
 
   return (
     <img
-      className={className}
+      className={`theme-ornament ${className}`}
       style={{ pointerEvents: 'none', ...style }}
       src={src}
       alt=""
@@ -183,7 +183,7 @@ export const FloralCornerStack = ({ position = 'top-left', className = '' }) => 
           key={i}
           src={layer.src}
           alt=""
-          className={`floral-stack__layer ${layer.animClass}`}
+          className={`theme-ornament floral-stack__layer ${layer.animClass}`}
           style={{
             ...layer.style,
             animationDelay: layer.animDelay,
@@ -200,7 +200,7 @@ export const FloralCornerStack = ({ position = 'top-left', className = '' }) => 
 // ============================================================
 export const FloralAccent = ({ className = '', style = {} }) => (
   <img
-    className={`${className} wind-sway-slow`}
+    className={`theme-ornament ${className} wind-sway-slow`}
     style={{ pointerEvents: 'none', animationDelay: '0.3s', ...style }}
     src={ornaments.bouquetVertical}
     alt=""
@@ -226,7 +226,7 @@ export const FloralBottom = ({ className = '', style = {} }) => (
       src={ornaments.bottomRightFlower}
       alt=""
       aria-hidden="true"
-      className="wind-sway-slow"
+      className="theme-ornament wind-sway-slow"
       style={{ width: '120px', transform: 'scaleX(-1)' }}
       loading="lazy"
     />
@@ -234,7 +234,7 @@ export const FloralBottom = ({ className = '', style = {} }) => (
       src={ornaments.bottomRightFlower}
       alt=""
       aria-hidden="true"
-      className="wind-sway-slow"
+      className="theme-ornament wind-sway-slow"
       style={{ width: '120px', animationDelay: '0.6s' }}
       loading="lazy"
     />
@@ -253,7 +253,7 @@ export const FloralSectionBridge = ({ className = '' }) => (
     <img
       src={ornaments.flowersCenter}
       alt=""
-      className="floral-bridge-image wind-sway-slow"
+      className="theme-ornament floral-bridge-image wind-sway-slow"
       loading="lazy"
     />
     <span className="floral-bridge-line" />

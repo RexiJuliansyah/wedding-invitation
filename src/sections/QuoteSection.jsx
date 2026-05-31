@@ -15,10 +15,19 @@ const QuoteSection = () => {
       <div className="relative z-10">
         <motion.h2
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
-          className="quote-title"
+          className="quote-bismillah"
         >
-          Save The Date
+          بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
         </motion.h2>
+
+        {meta.quranQuote.arabic && (
+          <motion.p
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+            className="quote-arabic"
+          >
+            {meta.quranQuote.arabic}
+          </motion.p>
+        )}
 
         <motion.p
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}

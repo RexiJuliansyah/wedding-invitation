@@ -7,9 +7,9 @@
    ============================================================ */
 :root {
   /* Colors */
-  --navy: #113468;
-  --navy-dark: #071B33;
-  --navy-light: #0E3460;
+  --navy: #8B7355;
+  --navy-dark: #6C5942;
+  --navy-light: #A38C6D;
   --cream: #FDF9F3;
   --cream-dark: #F5EDE2;
   --gold: #C8A96E;
@@ -201,6 +201,14 @@ a {
   left: 50%;
   transform: translate(-50%, -50%);
   background: radial-gradient(circle, rgba(210, 170, 140, 0.15) 0%, transparent 70%);
+}
+
+/* ============================================================
+   ORNAMENT THEME OVERRIDE
+   ============================================================ */
+.theme-ornament {
+  /* Converts original green/pink into a warm taupe/terracotta (#8B7355) */
+  filter: sepia(1) hue-rotate(-20deg) saturate(1.2) brightness(0.85) contrast(1.1);
 }
 
 /* ============================================================
@@ -999,6 +1007,26 @@ a {
   margin-bottom: 20px;
 }
 
+.quote-bismillah {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 2.2rem;
+  color: var(--white);
+  margin-bottom: 24px;
+  text-align: center;
+  direction: rtl;
+}
+
+.quote-arabic {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 1.6rem;
+  color: var(--white);
+  max-width: 400px;
+  margin: 0 auto 20px;
+  line-height: 2;
+  text-align: center;
+  direction: rtl;
+}
+
 .quote-text {
   font-family: var(--font-serif);
   font-size: 0.95rem;
@@ -1089,14 +1117,6 @@ a {
   color: var(--charcoal);
   opacity: 0.75;
   margin-bottom: 16px;
-}
-
-.event-section-title {
-  font-family: var(--font-script);
-  font-size: 2.2rem;
-  color: var(--navy);
-  text-align: center;
-  margin-bottom: 28px;
 }
 
 .btn-location {

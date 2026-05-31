@@ -1,9 +1,7 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { FloralCornerStack, FloralAccent } from '../components/FloralOrnaments';
-import WaveDivider from '../components/WaveDivider';
 import { invitationData } from '../data/invitationData';
-import closingImage from '../assets/groom.jpeg'; // Note: using groom.jpeg instead of image3.png which might not exist
+import WaveDivider from '../components/WaveDivider';
 
 const ClosingSection = () => {
   const { couple, meta } = invitationData;

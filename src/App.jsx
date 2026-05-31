@@ -14,7 +14,7 @@ import FloatingMusic from './components/FloatingMusic';
 import FloatingNavbar from './components/FloatingNavbar';
 
 import { invitationData } from './data/invitationData';
-import WaveDivider from './sections/WaveDivider';
+import WaveDivider from './components/WaveDivider';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +45,7 @@ function App() {
   const handleOpenInvitation = () => {
     setIsOpen(true);
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    
+
     // Play music when invitation is opened
     if (audioRef.current) {
       audioRef.current.play()

@@ -85,7 +85,7 @@ const HeroSection = () => {
             src={ornaments.bouquetUpward}
             alt=""
             aria-hidden="true"
-            className="hero-photo-floral-left wind-sway-slow"
+            className="theme-ornament hero-photo-floral-left wind-sway-slow"
             loading="lazy"
           />
         </motion.div>

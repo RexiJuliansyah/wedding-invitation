@@ -11,13 +11,13 @@ export const WaveDivider = ({ type = 'cream-to-navy', className = '' }) => {
           {/* Back wave layer - darker */}
           <path
             d="M0,60 C180,120 360,0 540,60 C720,120 900,20 1080,60 C1260,100 1380,40 1440,60 L1440,120 L0,120 Z"
-            fill="#0E3460"
+            fill="#A38C6D"
             opacity="0.5"
           />
           {/* Front wave layer - main navy */}
           <path
             d="M0,80 C200,40 400,100 600,70 C800,40 1000,100 1200,70 C1350,50 1400,80 1440,75 L1440,120 L0,120 Z"
-            fill="#113468"
+            fill="#8B7355"
           />
         </svg>
       </div>
