@@ -45,6 +45,9 @@ const HeroSection = () => {
 
   return (
     <section className="hero-section" id="home">
+
+      {/* Gradient overlay from bottom */}
+      <div className="opening-gradient" />
       {/* Watercolor stains */}
       <div className="watercolor-stain watercolor-stain--top-right" />
       <div className="watercolor-stain watercolor-stain--bottom-left" />
@@ -65,30 +68,6 @@ const HeroSection = () => {
           THE WEDDING OF
         </motion.p>
 
-        {/* Oval Photo Frame */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9, delay: 0.2 }}
-          className="hero-photo-wrapper"
-        >
-          <div className="hero-photo-frame">
-            <img
-              src={heroImage}
-              alt={`${invitationData.couple.groomNickname} & ${invitationData.couple.brideNickname}`}
-              loading="eager"
-            />
-          </div>
-          <FloralAccent className="hero-photo-floral" />
-          <img
-            src={ornaments.bouquetUpward}
-            alt=""
-            aria-hidden="true"
-            className="theme-ornament hero-photo-floral-left wind-sway-slow"
-            loading="lazy"
-          />
-        </motion.div>
 
         {/* Couple Names */}
         <motion.h2
@@ -107,9 +86,9 @@ const HeroSection = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="hero-tagline"
+          className="couple-fullname"
         >
-          Kami berharap Anda menjadi bagian dari hari istimewa kami.
+          {invitationData.meta.hashtag}
         </motion.p>
 
         {/* Countdown Timer */}
@@ -146,7 +125,7 @@ const HeroSection = () => {
           variants={fadeInUp}
           className="hero-date"
         >
-          {invitationData.event.akad.date}
+          11.07.2026
         </motion.p>
 
         {/* Save The Date Button */}
@@ -162,6 +141,9 @@ const HeroSection = () => {
           Save The Date
         </motion.button>
       </div>
+
+      <FloralCornerStack position="bottom-left" />
+      <FloralCornerStack position="bottom-right" />
     </section>
   );
 };

@@ -79,9 +79,6 @@ const OpeningScreen = ({ onOpen, guestName }) => {
         </motion.button>
       </div>
 
-      {/* Bottom stacked corners */}
-      <FloralCornerStack position="bottom-left" />
-      <FloralCornerStack position="bottom-right" />
     </motion.div>
   );
 };

@@ -209,6 +209,17 @@ export const FloralAccent = ({ className = '', style = {} }) => (
   />
 );
 
+export const FloralAccent2 = ({ className = '', style = {} }) => (
+  <img
+    className={`theme-ornament ${className} wind-sway-slow`}
+    style={{ pointerEvents: 'none', animationDelay: '0.3s', ...style }}
+    src={ornaments.bouquetUpward}
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+  />
+);
+
 // ============================================================
 // Floral Bottom — wide arrangement for section bottoms
 // ============================================================

@@ -21,10 +21,6 @@ const ClosingSection = () => {
       <section className="closing-section" id="closing">
         <div className="watercolor-stain watercolor-stain--top-right" />
 
-        {/* Stacked floral corners with wind animation */}
-        <FloralCornerStack position="top-left" />
-        <FloralCornerStack position="top-right" />
-
         <div className="relative z-10">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={zoomIn}
@@ -58,8 +54,6 @@ const ClosingSection = () => {
           </motion.p>
         </div>
 
-        <FloralCornerStack position="bottom-left" />
-        <FloralCornerStack position="bottom-right" />
       </section>
 
       <WaveDivider type="cream-to-navy" />

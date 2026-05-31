@@ -321,7 +321,7 @@ a {
 
 .opening-names {
   font-family: var(--font-script);
-  font-size: 2.8rem;
+  font-size: 3.6rem;
   color: var(--navy);
   line-height: 1.2;
   margin-bottom: 16px;
@@ -389,7 +389,7 @@ a {
    ============================================================ */
 .hero-section {
   position: relative;
-  background-image: url('./assets/images/bg-image-main.webp');
+  background-image: url('./assets/bg-texture.png');
   background-size: cover;
   background-position: center;
   padding: 56px 28px 48px;
@@ -463,7 +463,7 @@ a {
 /* Names */
 .hero-names {
   font-family: var(--font-script);
-  font-size: 2.4rem;
+  font-size: 3.6rem;
   color: var(--navy);
   margin-bottom: 12px;
   line-height: 1.3;
@@ -523,8 +523,10 @@ a {
 
 .hero-date {
   font-family: var(--font-sans);
-  font-size: 0.82rem;
-  color: var(--charcoal);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy-light);
+  margin-top: 14px;
   margin-bottom: 24px;
   opacity: 0.85;
 }
@@ -877,11 +879,20 @@ a {
   z-index: 2;
 }
 
-.couple-bismillah {
-  font-size: 2rem;
-  color: var(--navy);
-  margin-bottom: 16px;
-  line-height: 1.4;
+.couple-bismillah-img {
+  width: 280px;
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 24px;
+}
+
+.couple-bismillah-img-putih {
+  width: 280px;
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 24px;
+  /* Converts the black image to pure white */
+  filter: brightness(0) invert(1);
 }
 
 .couple-salam {
@@ -939,20 +950,44 @@ a {
   pointer-events: none;
 }
 
-.couple-name {
+.couple-photo-floral-left {
+  position: absolute;
+  bottom: -8px;
+  left: -30px;
+  width: 85px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.couple-nickname {
   font-family: var(--font-script);
-  font-size: 2rem;
+  font-size: 3.5rem;
   color: var(--navy);
-  margin-bottom: 6px;
+  margin-bottom: -2px;
+  line-height: 1;
+}
+
+.couple-fullname {
+  font-family: var(--font-serif);
+  font-size: 1.30rem;
+  font-weight: 1000;
+  color: var(--navy);
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.parents-label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
 }
 
 .couple-parents {
   font-family: var(--font-sans);
-  font-size: 0.8rem;
-  font-style: italic;
+  font-size: 0.85rem;
   color: var(--charcoal);
-  opacity: 0.8;
-  margin-bottom: 12px;
+  opacity: 0.85;
+  margin-bottom: 16px;
   line-height: 1.5;
 }
 
@@ -960,22 +995,30 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--navy);
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 20px;
+  background: rgba(139, 115, 85, 0.6);
+  /* Translucent brown */
+  border: 1px solid rgba(255, 255, 255, 0.4);
   color: var(--white);
   transition: var(--transition-default);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  backdrop-filter: blur(4px);
 }
 
 .couple-ig-btn:hover {
-  background: var(--navy-light);
-  transform: scale(1.1);
+  background: var(--navy);
+  transform: translateY(-2px);
 }
 
 .couple-ig-btn svg {
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
 }
 
 .couple-separator {
@@ -1636,7 +1679,7 @@ a {
 .wishes-title {
   font-family: var(--font-script);
   font-size: 2.2rem;
-  color: var(--success);
+  color: var(--white);
   text-align: center;
   margin-bottom: 6px;
 }
@@ -2111,8 +2154,12 @@ a {
 .couple-section::before {
   content: "";
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background-color: var(--navy); /* This is the Taupe theme color */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--navy);
+  /* This is the Taupe theme color */
   background-image: url('./assets/images/bg-image.webp');
   background-size: cover;
   background-position: center;
@@ -2120,7 +2167,8 @@ a {
   background-blend-mode: screen;
   /* Multiply makes White pixels transparent on Cream, and Taupe pixels darken the Cream */
   mix-blend-mode: multiply;
-  opacity: 0.85; /* Tweak opacity so it's clear but not overpowering */
+  opacity: 0.85;
+  /* Tweak opacity so it's clear but not overpowering */
   z-index: -1;
   pointer-events: none;
 }

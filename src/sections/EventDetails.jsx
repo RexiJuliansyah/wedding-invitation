@@ -4,7 +4,7 @@ import { FloralCornerStack } from '../components/FloralOrnaments';
 import { invitationData } from '../data/invitationData';
 
 const generateICS = (event, coupleName) => {
-  const weddingISO = invitationData.event.weddingDate; 
+  const weddingISO = invitationData.event.weddingDate;
   const startDate = new Date(weddingISO);
 
   if (event.title === 'Resepsi') {
@@ -50,7 +50,7 @@ const EventCard = ({ akad, resepsi, coupleName }) => {
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -59,7 +59,7 @@ const EventCard = ({ akad, resepsi, coupleName }) => {
     >
       <h3 className="event-card-title">{akad.title} & {resepsi.title}</h3>
       <p className="event-card-date">{akad.date}</p>
-      
+
       <div style={{ margin: '16px 0' }}>
         <p className="event-card-time" style={{ marginBottom: '4px' }}>
           <strong>{akad.title}:</strong> {akad.time}
@@ -128,9 +128,6 @@ const EventSection = () => {
 
         <EventCard akad={event.akad} resepsi={event.resepsi} coupleName={coupleName} />
       </div>
-
-      <FloralCornerStack position="bottom-left" />
-      <FloralCornerStack position="bottom-right" />
     </section>
   );
 };

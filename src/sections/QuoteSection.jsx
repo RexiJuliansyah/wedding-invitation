@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { invitationData } from '../data/invitationData';
+import bismillahImage from '../assets/images/Bismillah-image.png';
 
 const QuoteSection = () => {
   const { meta } = invitationData;
@@ -15,19 +16,14 @@ const QuoteSection = () => {
       <div className="relative z-10">
         <motion.h2
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
-          className="quote-bismillah"
+          className="flex justify-center w-full"
         >
-          بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+          <img
+            src={bismillahImage}
+            alt="Bismillah"
+            className="couple-bismillah-img-putih mb-5"
+          />
         </motion.h2>
-
-        {meta.quranQuote.arabic && (
-          <motion.p
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
-            className="quote-arabic"
-          >
-            {meta.quranQuote.arabic}
-          </motion.p>
-        )}
 
         <motion.p
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}

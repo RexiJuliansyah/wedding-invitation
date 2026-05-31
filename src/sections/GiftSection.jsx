@@ -3,13 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { invitationData } from '../data/invitationData';
 import chipImage from '../assets/images/chip-atm.png';
 import bcaLogo from '../assets/images/BCA_logo.png';
-// Import logo lain jika ada, misalnya danaLogo
-import danaLogo from '../assets/images/DANA_logo.png';
+import bsiLogo from '../assets/images/BSI_logo.png';
 
 // Map bank names to logo imports
 const bankLogos = {
   BCA: bcaLogo,
-  DANA: danaLogo,
+  BSI: bsiLogo
 };
 
 const GiftSection = () => {
