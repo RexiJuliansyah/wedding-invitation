@@ -39,7 +39,7 @@ export default function FloatingParticles() {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-40 pointer-events-none overflow-hidden max-w-[500px] mx-auto left-0 right-0">
+    <div className="fixed top-0 left-0 right-0 h-[100svh] z-40 pointer-events-none overflow-hidden max-w-[500px] mx-auto">
       {particles.map((p) => (
         <div
           key={p.id}

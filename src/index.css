@@ -2186,7 +2186,7 @@ a {
     transform: translate3d(0, 0, 0) rotate(0deg);
   }
   100% {
-    transform: translate3d(var(--x-end), 110vh, 0) rotate(var(--rotation));
+    transform: translate3d(var(--x-end), 110svh, 0) rotate(var(--rotation));
   }
 }
 
