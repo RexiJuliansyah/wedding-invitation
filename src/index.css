@@ -2090,3 +2090,37 @@ a {
   pointer-events: auto;
   visibility: visible;
 }
+
+/* ============================================================
+   BACKGROUND TEXTURE FIX FOR COUPLE SECTION ONLY
+   ============================================================ */
+/* Remove raw background images from the section directly so we can use pseudo-elements for tinting */
+.couple-section {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+/* Ensure the base has the correct background color */
+.couple-section {
+  background-color: var(--cream) !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Pseudo-element for tinting */
+.couple-section::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: var(--navy); /* This is the Taupe theme color */
+  background-image: url('./assets/images/bg-image.webp');
+  background-size: cover;
+  background-position: center;
+  /* Screen converts dark pixels to Taupe, keeps white pixels White */
+  background-blend-mode: screen;
+  /* Multiply makes White pixels transparent on Cream, and Taupe pixels darken the Cream */
+  mix-blend-mode: multiply;
+  opacity: 0.85; /* Tweak opacity so it's clear but not overpowering */
+  z-index: -1;
+  pointer-events: none;
+}
