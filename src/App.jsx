@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
 import OpeningScreen from './sections/OpeningScreen';
 import HeroSection from './sections/HeroSection';
-import CoupleSection from './sections/CoupleSection';
-import QuoteSection from './sections/QuoteSection';
-import EventSection from './sections/EventDetails';
-import GiftSection from './sections/GiftSection';
-import WishesSection from './sections/WishesSection';
-import ClosingSection from './sections/ClosingSection';
+
+const CoupleSection = lazy(() => import('./sections/CoupleSection'));
+const QuoteSection = lazy(() => import('./sections/QuoteSection'));
+const EventSection = lazy(() => import('./sections/EventDetails'));
+const GiftSection = lazy(() => import('./sections/GiftSection'));
+const WishesSection = lazy(() => import('./sections/WishesSection'));
+const ClosingSection = lazy(() => import('./sections/ClosingSection'));
 
 import FloatingMusic from './components/FloatingMusic';
 import FloatingNavbar from './components/FloatingNavbar';
@@ -77,14 +78,18 @@ function App() {
 
       <main className={`main-content ${isOpen ? 'main-content--visible' : ''}`}>
         <HeroSection />
-        <CoupleSection />
-        <WaveDivider type="cream-to-navy" />
-        <QuoteSection />
-        <EventSection />
-        <WaveDivider type="cream-to-navy" />
-        <GiftSection />
-        <WishesSection />
-        <ClosingSection />
+        {isOpen && (
+          <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--cream)' }} />}>
+            <CoupleSection />
+            <WaveDivider type="cream-to-navy" />
+            <QuoteSection />
+            <EventSection />
+            <WaveDivider type="cream-to-navy" />
+            <GiftSection />
+            <WishesSection />
+            <ClosingSection />
+          </Suspense>
+        )}
       </main>
 
       {/* Global Elements - Only visible when invitation is opened */}

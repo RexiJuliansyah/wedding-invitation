@@ -14,31 +14,40 @@ const FloatingNavbar = () => {
 
   // Show navbar only after scrolling past the opening section
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Determine active section
+          const sections = ['home', 'couple', 'event', 'gift', 'wishes'];
+          let current = '';
 
-      // Determine active section
-      const sections = ['home', 'couple', 'event', 'gift', 'wishes'];
-      let current = '';
-
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          // If the top of the section is somewhat in the middle of the screen
-          if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-            current = section;
-            break;
+          for (const section of sections) {
+            const el = document.getElementById(section);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              // If the top of the section is somewhat in the middle of the screen
+              if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                current = section;
+                break;
+              }
+            }
           }
-        }
-      }
 
-      if (current) {
-        setActiveSection(current);
+          if (current) {
+            setActiveSection(current);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const handleGiftClick = () => {

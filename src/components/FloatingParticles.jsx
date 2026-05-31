@@ -43,7 +43,7 @@ export default function FloatingParticles() {
       {particles.map((p) => (
         <div
           key={p.id}
-          className="absolute animate-petal-fall drop-shadow-sm"
+          className="absolute animate-petal-fall"
           style={{
             width: p.size,
             height: p.size,
