@@ -32,7 +32,7 @@ function App() {
     // Wait for fonts and initial assets to load before showing the app
     document.fonts.ready.then(() => {
       // Add a tiny delay for smoother transition
-      setTimeout(() => setIsLoaded(true), 300);
+      setTimeout(() => setIsLoaded(true), 1500);
     });
 
     // Get guest name from URL parameter ?to=Nama+Tamu
@@ -93,7 +93,7 @@ function App() {
       <main className={`main-content ${isOpen ? 'main-content--visible' : ''}`}>
         <HeroSection />
         {isOpen && (
-          <Suspense fallback={<SplashScreen />}>
+          <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--cream)' }} />}>
             <CoupleSection />
             <WaveDivider type="cream-to-navy" />
             <QuoteSection />
