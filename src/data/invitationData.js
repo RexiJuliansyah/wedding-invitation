@@ -58,11 +58,11 @@ export const invitationData = {
   // Gift / Amplop Digital
   gift: {
     banks: [
-      { name: 'BCA', accountNumber: '3761381847', accountHolder: 'REXI FAZA JULIANSYAH' },
       { name: 'BSI', accountNumber: '7220510624', accountHolder: 'JULIANA KUS INGGARDINI' },
+      { name: 'BCA', accountNumber: '3761381847', accountHolder: 'REXI FAZA JULIANSYAH' },
     ],
     address: {
-      name: 'Rexi / Julia',
+      name: 'Julia / Rexi',
       phone: '081234567890',
       detail: 'Jl. Komplek Cibiru Asri Blok Q No 8 RT.4/RW.17,\nCileunyi, Kabupaten Bandung, Jawa Barat',
     },
