@@ -422,7 +422,7 @@ a {
 .hero-glass-card {
   position: relative;
   z-index: 10;
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.70);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.5);
