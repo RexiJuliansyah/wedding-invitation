@@ -149,7 +149,6 @@ const GiftSection = () => {
               Kirim Hadiah
             </h4>
             <p>{gift.address.name}</p>
-            <p>No. HP: {gift.address.phone}</p>
             <p style={{ whiteSpace: 'pre-line' }}>{gift.address.detail}</p>
             <button
               className="btn-copy"

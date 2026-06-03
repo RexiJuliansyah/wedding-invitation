@@ -64,7 +64,7 @@ export const invitationData = {
     address: {
       name: 'Rexi / Julia',
       phone: '081234567890',
-      detail: 'Jl. Contoh Alamat Pernikahan No. 123,\nKecamatan Blimbing, Kota Malang, Jawa Timur',
+      detail: 'Jl. Komplek Cibiru Asri Blok Q No 8 RT.4/RW.17,\nCileunyi, Kabupaten Bandung, Jawa Barat',
     },
   },
 

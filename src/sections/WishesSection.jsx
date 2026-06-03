@@ -177,7 +177,7 @@ const WishesSection = () => {
           ))}
 
           {wishes.length === 0 && (
-            <p className="text-center text-charcoal opacity-70 mt-4 italic">Belum ada ucapan. Jadilah yang pertama memberikan doa!</p>
+            <p className="text-center text-white opacity-70 mt-4 italic">Belum ada ucapan. Jadilah yang pertama memberikan doa!</p>
           )}
         </motion.div>
       </div>
