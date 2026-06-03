@@ -3,7 +3,12 @@ import { motion } from 'framer-motion';
 
 const SplashScreen = () => {
   return (
-    <div className="splash-screen">
+    <motion.div 
+      className="splash-screen"
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.8, ease: "easeInOut" }}
+    >
 
       {/* Gradient overlay from bottom */}
       <div className="opening-gradient" />
@@ -27,7 +32,7 @@ const SplashScreen = () => {
         </div>
         <p className="splash-text">Memuat cinta...</p>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

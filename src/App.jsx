@@ -53,11 +53,6 @@ function App() {
     };
   }, []);
 
-  // Show splash screen while fonts/assets are loading
-  if (!isLoaded) {
-    return <SplashScreen />;
-  }
-
   const handleOpenInvitation = () => {
     setIsOpen(true);
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -82,12 +77,15 @@ function App() {
   return (
     <div className="app-wrapper">
       <AnimatePresence>
-        {!isOpen && (
+        {!isLoaded ? (
+          <SplashScreen key="splash" />
+        ) : !isOpen ? (
           <OpeningScreen
+            key="opening"
             onOpen={handleOpenInvitation}
             guestName={guestName}
           />
-        )}
+        ) : null}
       </AnimatePresence>
 
       <main className={`main-content ${isOpen ? 'main-content--visible' : ''}`}>
