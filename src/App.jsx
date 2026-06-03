@@ -14,6 +14,7 @@ const ClosingSection = lazy(() => import('./sections/ClosingSection'));
 import FloatingMusic from './components/FloatingMusic';
 import FloatingNavbar from './components/FloatingNavbar';
 import FloatingParticles from './components/FloatingParticles';
+import SplashScreen from './components/SplashScreen';
 
 import { invitationData } from './data/invitationData';
 import WaveDivider from './components/WaveDivider';
@@ -23,9 +24,17 @@ function App() {
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [guestName, setGuestName] = useState('');
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const audioRef = useRef(null);
 
   useEffect(() => {
+    // Wait for fonts and initial assets to load before showing the app
+    document.fonts.ready.then(() => {
+      // Add a tiny delay for smoother transition
+      setTimeout(() => setIsLoaded(true), 300);
+    });
+
     // Get guest name from URL parameter ?to=Nama+Tamu
     const urlParams = new URLSearchParams(window.location.search);
     const to = urlParams.get('to');
@@ -43,6 +52,11 @@ function App() {
       }
     };
   }, []);
+
+  // Show splash screen while fonts/assets are loading
+  if (!isLoaded) {
+    return <SplashScreen />;
+  }
 
   const handleOpenInvitation = () => {
     setIsOpen(true);
@@ -79,7 +93,7 @@ function App() {
       <main className={`main-content ${isOpen ? 'main-content--visible' : ''}`}>
         <HeroSection />
         {isOpen && (
-          <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--cream)' }} />}>
+          <Suspense fallback={<SplashScreen />}>
             <CoupleSection />
             <WaveDivider type="cream-to-navy" />
             <QuoteSection />

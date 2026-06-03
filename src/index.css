@@ -240,6 +240,73 @@ a {
   pointer-events: none;
 }
 
+/* ============================================================
+   MAIN CONTENT VISIBILITY CONTROL
+   ============================================================ */
+.main-content {
+  height: 100vh;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.main-content--visible {
+  height: auto;
+  overflow: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 1.2s ease;
+}
+
+/* ============================================================
+   SPLASH SCREEN (LAZY LOAD FALLBACK)
+   ============================================================ */
+.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--container-max);
+  height: 100vh;
+  height: 100svh;
+  background-color: var(--cream);
+  background-image: url('./assets/bg-texture.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.15);
+}
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.splash-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--gold);
+}
+
+.splash-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: rgba(212, 175, 55, 0.2); /* Soft gold fill */
+}
+
+.splash-text {
+  font-family: var(--font-script);
+  font-size: 2rem;
+  color: var(--navy);
+  letter-spacing: 1px;
+}
+
 .opening-bg {
   position: absolute;
   top: 0;
