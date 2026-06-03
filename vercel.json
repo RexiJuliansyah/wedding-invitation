@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
+      "source": "/julia-rexi",
+      "destination": "/index.html"
+    },
+    {
       "source": "/julia-rexi/(.*)",
-      "destination": "/julia-rexi/index.html"
+      "destination": "/$1"
     }
   ]
 }
