@@ -1,10 +1,8 @@
 import { motion } from 'framer-motion';
 import { FloralCornerStack, FloralAccent, ornaments } from '../components/FloralOrnaments';
-import { useCountdown } from '../hooks/useCountdown';
 import { invitationData } from '../data/invitationData';
 
 const HeroSection = () => {
-  const { days, hours, minutes, seconds } = useCountdown(invitationData.event.weddingDate);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -60,31 +58,6 @@ const HeroSection = () => {
             {invitationData.meta.hashtag}
           </motion.p>
 
-          {/* Countdown Timer */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="countdown-wrapper"
-          >
-            <div className="countdown-item">
-              <span className="countdown-number">{days}</span>
-              <span className="countdown-label">Hari</span>
-            </div>
-            <div className="countdown-item">
-              <span className="countdown-number">{hours}</span>
-              <span className="countdown-label">Jam</span>
-            </div>
-            <div className="countdown-item">
-              <span className="countdown-number">{minutes}</span>
-              <span className="countdown-label">Menit</span>
-            </div>
-            <div className="countdown-item">
-              <span className="countdown-number">{seconds}</span>
-              <span className="countdown-label">Detik</span>
-            </div>
-          </motion.div>
 
           {/* Date */}
           <motion.p

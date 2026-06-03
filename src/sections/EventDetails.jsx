@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { FloralCornerStack } from '../components/FloralOrnaments';
 import { invitationData } from '../data/invitationData';
+import { useCountdown } from '../hooks/useCountdown';
 
 const EventCard = ({ akad, resepsi, coupleName }) => {
   const handleOpenMaps = (url) => {
@@ -49,6 +50,12 @@ const EventCard = ({ akad, resepsi, coupleName }) => {
 const EventSection = () => {
   const { event, couple } = invitationData;
   const coupleName = `${couple.brideNickname} & ${couple.groomNickname}`;
+  const { days, hours, minutes, seconds } = useCountdown(invitationData.event.weddingDate);
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+  };
 
   return (
     <section className="event-section" id="event">
@@ -67,6 +74,33 @@ const EventSection = () => {
         >
           Waktu & Tempat
         </motion.h2>
+
+        {/* Countdown Timer */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="countdown-wrapper"
+          style={{ marginBottom: '32px' }}
+        >
+          <div className="countdown-item">
+            <span className="countdown-number">{days}</span>
+            <span className="countdown-label">Hari</span>
+          </div>
+          <div className="countdown-item">
+            <span className="countdown-number">{hours}</span>
+            <span className="countdown-label">Jam</span>
+          </div>
+          <div className="countdown-item">
+            <span className="countdown-number">{minutes}</span>
+            <span className="countdown-label">Menit</span>
+          </div>
+          <div className="countdown-item">
+            <span className="countdown-number">{seconds}</span>
+            <span className="countdown-label">Detik</span>
+          </div>
+        </motion.div>
 
         <EventCard akad={event.akad} resepsi={event.resepsi} coupleName={coupleName} />
       </div>
