@@ -28,12 +28,12 @@ const OpeningScreen = ({ onOpen, guestName }) => {
       {/* Content */}
       <div className="opening-content">
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="opening-label"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="hero-subtitle"
         >
-          The Wedding of
+          THE WEDDING OF
         </motion.p>
 
         <motion.h1

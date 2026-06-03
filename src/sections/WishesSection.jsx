@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useWishes } from '../hooks/useWishes';
 
 const WishesSection = () => {
-  const { wishes, addWish } = useWishes();
+  const { wishes, addWish, hasSubmitted } = useWishes();
   const [formData, setFormData] = useState({ name: '', attendance: 'Hadir', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -12,7 +12,7 @@ const WishesSection = () => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.message.trim()) return;
     setIsSubmitting(true);
-    
+
     try {
       await addWish({
         id: Date.now(),
@@ -22,10 +22,15 @@ const WishesSection = () => {
       });
       setSuccess(true);
       setFormData({ name: '', attendance: 'Hadir', message: '' });
-      setTimeout(() => setSuccess(false), 3000);
     } catch (error) {
-      console.error("Gagal mengirim:", error);
-      alert("Maaf, terjadi kesalahan saat mengirim ucapan. Pastikan koneksi lancar.");
+      if (error.message === 'ALREADY_SUBMITTED') {
+        setSuccess(true);
+      } else if (error.message === 'DUPLICATE_NAME') {
+        setSuccess(true);
+      } else {
+        console.error("Gagal mengirim:", error);
+        alert("Maaf, terjadi kesalahan saat mengirim ucapan. Pastikan koneksi lancar.");
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -43,13 +48,13 @@ const WishesSection = () => {
   return (
     <section className="wishes-section" id="wishes">
       <div className="relative z-10">
-        <motion.h2 
+        <motion.h2
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
           className="wishes-title"
         >
           Ucapkan Sesuatu
         </motion.h2>
-        
+
         <motion.p
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
           className="wishes-subtitle"
@@ -58,7 +63,7 @@ const WishesSection = () => {
         </motion.p>
 
         {/* Stats */}
-        <motion.div 
+        <motion.div
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
           className="wishes-stats"
         >
@@ -73,45 +78,75 @@ const WishesSection = () => {
           </span>
         </motion.div>
 
-        {/* Form RSVP */}
-        <motion.form 
-          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
-          className="wishes-form"
-          onSubmit={handleSubmit}
-        >
-          <input 
-            type="text" 
-            placeholder="Nama" 
-            className="wishes-input" 
-            value={formData.name}
-            onChange={(e) => setFormData({...formData, name: e.target.value})}
-            required
-          />
-          
-          <textarea 
-            placeholder="Tuliskan ucapan & doa restu..." 
-            className="wishes-textarea" 
-            value={formData.message}
-            onChange={(e) => setFormData({...formData, message: e.target.value})}
-            required
-          />
-
-          <select
-            className="wishes-select"
-            value={formData.attendance}
-            onChange={(e) => setFormData({ ...formData, attendance: e.target.value })}
+        {/* Form RSVP — Show form or thank you message */}
+        {hasSubmitted || success ? (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="wishes-form"
+            style={{ textAlign: 'center', padding: '2.5rem 1.5rem' }}
           >
-            <option value="Hadir">Konfirmasi Kehadiran — Hadir</option>
-            <option value="Tidak Hadir">Konfirmasi Kehadiran — Tidak Hadir</option>
-          </select>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>💌</div>
+            <h3 style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: '1.4rem',
+              color: 'var(--gold)',
+              marginBottom: '0.5rem'
+            }}>
+              Terima Kasih!
+            </h3>
+            <p style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '0.95rem',
+              color: 'var(--white)',
+              opacity: 0.8,
+              lineHeight: 1.6
+            }}>
+              Ucapan & doa restu Anda telah kami terima. <br />
+              Terima kasih atas kebaikan hatinya 🙏
+            </p>
+          </motion.div>
+        ) : (
+          <motion.form
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+            className="wishes-form"
+            onSubmit={handleSubmit}
+          >
+            <input
+              type="text"
+              placeholder="Nama"
+              className="wishes-input"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              required
+            />
 
-          <button type="submit" className="btn-submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Mengirim...' : success ? 'Terkirim ✓' : 'Kirim'}
-          </button>
-        </motion.form>
+            <textarea
+              placeholder="Tuliskan ucapan & doa restu..."
+              className="wishes-textarea"
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              required
+            />
+
+            <select
+              className="wishes-select"
+              value={formData.attendance}
+              onChange={(e) => setFormData({ ...formData, attendance: e.target.value })}
+            >
+              <option value="Hadir">Konfirmasi Kehadiran — Hadir</option>
+              <option value="Tidak Hadir">Konfirmasi Kehadiran — Tidak Hadir</option>
+            </select>
+
+            <button type="submit" className="btn-submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Mengirim...' : 'Kirim'}
+            </button>
+          </motion.form>
+        )}
 
         {/* Wishes List */}
-        <motion.div 
+        <motion.div
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
           className="wishes-list"
         >
@@ -136,11 +171,11 @@ const WishesSection = () => {
               </div>
               <p className="wish-card-text">{wish.message}</p>
               <span className="wish-card-time">
-                ⏰ {wish.created_at ? new Date(wish.created_at).toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric'}) : 'Baru saja'}
+                ⏰ {wish.created_at ? new Date(wish.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Baru saja'}
               </span>
             </div>
           ))}
-          
+
           {wishes.length === 0 && (
             <p className="text-center text-charcoal opacity-70 mt-4 italic">Belum ada ucapan. Jadilah yang pertama memberikan doa!</p>
           )}

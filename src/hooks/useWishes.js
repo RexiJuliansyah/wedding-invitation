@@ -7,8 +7,13 @@ const initialMockWishes = [
   { id: 2, name: 'Jane Smith', attendance: 'Tidak Hadir', message: 'Maaf tidak bisa hadir, doa terbaik untuk kalian.', created_at: new Date().toISOString() }
 ];
 
+const STORAGE_KEY = 'wedding_wish_submitted';
+
 export function useWishes() {
   const [wishes, setWishes] = useState([]);
+  const [hasSubmitted, setHasSubmitted] = useState(() => {
+    return localStorage.getItem(STORAGE_KEY) === 'true';
+  });
   const hasSupabase = Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY);
 
   const loadWishes = async () => {
@@ -67,7 +72,17 @@ export function useWishes() {
     }
   }, []);
 
+  const markAsSubmitted = () => {
+    localStorage.setItem(STORAGE_KEY, 'true');
+    setHasSubmitted(true);
+  };
+
   const addWish = async (wish) => {
+    // Check localStorage flag first
+    if (hasSubmitted) {
+      throw new Error('ALREADY_SUBMITTED');
+    }
+
     if (!hasSupabase) {
       // Local fallback
       const newWish = { ...wish, created_at: new Date().toISOString(), id: Date.now() };
@@ -75,7 +90,20 @@ export function useWishes() {
       const updatedWishes = [newWish, ...currentWishes];
       setWishes(updatedWishes);
       localStorage.setItem('localWishes', JSON.stringify(updatedWishes));
+      markAsSubmitted();
       return;
+    }
+
+    // Check if same name already exists in DB
+    const { data: existing } = await supabase
+      .from('wishes')
+      .select('id')
+      .ilike('name', wish.name.trim())
+      .limit(1);
+
+    if (existing && existing.length > 0) {
+      markAsSubmitted();
+      throw new Error('DUPLICATE_NAME');
     }
 
     const { id, ...wishData } = wish;
@@ -88,10 +116,11 @@ export function useWishes() {
       console.error('Error adding wish:', error);
       throw error;
     } else {
+      markAsSubmitted();
       window.dispatchEvent(new Event('wishes_updated'));
       loadWishes();
     }
   };
 
-  return { wishes, addWish };
+  return { wishes, addWish, hasSubmitted };
 }

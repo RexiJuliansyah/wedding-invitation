@@ -78,7 +78,7 @@ export const invitationData = {
 
   // Music
   music: {
-    src: '/music.m4a',
+    src: `${import.meta.env.BASE_URL}music.m4a`,
   },
 
   // Meta & Texts
