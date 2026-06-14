@@ -29,7 +29,7 @@ export const invitationData = {
     resepsi: {
       title: "Resepsi",
       date: "Sabtu, 11 Juli 2026",
-      time: "10:30 - 13:00 WIB",
+      time: "10:30 - 13:30 WIB",
       venue: "Ponyo® Resto & Wedding",
       address:
         "Aula Atas\nJl. Raya Cinunuk No.186, Cinunuk, Kec. Cileunyi\nKabupaten Bandung, Jawa Barat",
