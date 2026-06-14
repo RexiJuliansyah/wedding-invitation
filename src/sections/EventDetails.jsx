@@ -16,7 +16,7 @@ const EventCard = ({ akad, resepsi, coupleName }) => {
       transition={{ duration: 0.8 }}
       className="event-card"
     >
-      <strong><p className="event-card-time">{akad.date}</p></strong>
+      <strong><p className="event-card-time" style={{ fontFamily: "var(--font-script)", fontSize: '24px' }}>{akad.date}</p></strong>
       <div style={{ margin: '16px 0' }}>
         <p className="event-card-time" style={{ marginBottom: '4px' }}>
           <strong>{akad.title}:</strong> {akad.time}
