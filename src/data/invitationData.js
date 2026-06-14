@@ -75,7 +75,7 @@ export const invitationData = {
       name: "Julia / Rexi",
       phone: "081234567890",
       detail:
-        "Jl. Komplek Cibiru Asri Blok Q No 8 RT.4/RW.17,\nCileunyi, Kabupaten Bandung, Jawa Barat",
+        "Komplek Cibiru Asri Blok Q No 8 RT.4/RW.17,\nCileunyi, Kabupaten Bandung, Jawa Barat",
     },
   },
 

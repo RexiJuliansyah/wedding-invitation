@@ -16,7 +16,6 @@ const EventCard = ({ akad, resepsi, coupleName }) => {
       transition={{ duration: 0.8 }}
       className="event-card"
     >
-      <h3 className="event-card-title">{akad.title} & {resepsi.title}</h3>
       <p className="event-card-date">{akad.date}</p>
 
       <div style={{ margin: '16px 0' }}>
@@ -72,7 +71,7 @@ const EventSection = () => {
           transition={{ duration: 0.8 }}
           className="event-section-title"
         >
-          Waktu & Tempat
+          {event.akad.title} & {event.resepsi.title}
         </motion.h2>
 
         {/* Countdown Timer */}
