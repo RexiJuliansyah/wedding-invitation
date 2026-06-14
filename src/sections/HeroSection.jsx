@@ -60,18 +60,6 @@ const HeroSection = () => {
             {invitationData.meta.hashtag}
           </motion.p>
 
-
-          {/* Date */}
-          <motion.p
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="hero-date"
-          >
-            11.07.2026
-          </motion.p>
-
           {/* Scroll Indicator */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
