@@ -297,7 +297,8 @@ a {
 .splash-icon svg {
   width: 100%;
   height: 100%;
-  fill: rgba(212, 175, 55, 0.2); /* Soft gold fill */
+  fill: rgba(212, 175, 55, 0.2);
+  /* Soft gold fill */
 }
 
 .splash-text {
@@ -1303,7 +1304,7 @@ a {
 .event-card-time {
   font-family: var(--font-sans);
   font-size: 0.85rem;
-  color: var(--charcoal);
+  color: var(--navy);
   margin-bottom: 12px;
   opacity: 0.85;
 }
