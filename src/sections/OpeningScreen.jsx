@@ -40,9 +40,11 @@ const OpeningScreen = ({ onOpen, guestName }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="opening-names"
+          className="opening-names flex flex-col items-center justify-center leading-none"
         >
-          {invitationData.couple.brideNickname} & {invitationData.couple.groomNickname}
+          <span>{invitationData.couple.brideNickname}</span>
+          <span className="text-3xl sm:text-4xl text-sage-600/80 my-1 font-serif italic">&amp;</span>
+          <span>{invitationData.couple.groomNickname}</span>
         </motion.h1>
 
         <motion.p

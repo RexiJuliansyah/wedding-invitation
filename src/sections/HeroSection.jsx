@@ -42,9 +42,11 @@ const HeroSection = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="hero-names"
+            className="hero-names flex flex-col items-center justify-center leading-none"
           >
-            {invitationData.couple.brideNickname} &amp; {invitationData.couple.groomNickname}
+            <span>{invitationData.couple.brideNickname}</span>
+            <span className="text-4xl sm:text-5xl text-sage-600/80 my-2 font-serif italic">&amp;</span>
+            <span>{invitationData.couple.groomNickname}</span>
           </motion.h2>
 
           {/* Tagline */}
