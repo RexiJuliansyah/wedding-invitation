@@ -16,8 +16,7 @@ const EventCard = ({ akad, resepsi, coupleName }) => {
       transition={{ duration: 0.8 }}
       className="event-card"
     >
-      <p className="event-card-date">{akad.date}</p>
-
+      <strong><p className="event-card-time">{akad.date}</p></strong>
       <div style={{ margin: '16px 0' }}>
         <p className="event-card-time" style={{ marginBottom: '4px' }}>
           <strong>{akad.title}:</strong> {akad.time}
@@ -27,7 +26,7 @@ const EventCard = ({ akad, resepsi, coupleName }) => {
         </p>
       </div>
 
-      <p className="event-card-venue">Tempat: {akad.venue}</p>
+      <strong><p className="event-card-time">Tempat: {akad.venue}</p></strong>
       <p className="event-card-address" style={{ whiteSpace: 'pre-line' }}>{akad.address}</p>
 
       <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
