@@ -25,15 +25,18 @@ const HeroSection = () => {
       {/* Glassmorphism Card */}
       <div className="hero-glass-card">
         <div className="relative z-10 w-full">
-          <motion.p
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="hero-subtitle"
+            className="flex flex-col items-center mb-6"
           >
-            THE WEDDING OF
-          </motion.p>
+            <p className="font-serif italic text-lg md:text-xl tracking-wide opacity-90 text-navy">
+              An Intimate Wedding of
+            </p>
+            <div className="w-12 h-[1px] mt-3 opacity-50" style={{ backgroundColor: 'var(--navy)' }}></div>
+          </motion.div>
 
 
           {/* Couple Names */}

@@ -27,14 +27,17 @@ const OpeningScreen = ({ onOpen, guestName }) => {
 
       {/* Content */}
       <div className="opening-content">
-        <motion.p
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="hero-subtitle"
+          className="flex flex-col items-center mb-6"
         >
-          THE WEDDING OF
-        </motion.p>
+          <p className="font-serif italic text-lg md:text-xl tracking-wide opacity-90 text-navy">
+            The Intimate Wedding of
+          </p>
+          <div className="w-12 h-[1px] mt-3 opacity-50" style={{ backgroundColor: 'var(--navy)' }}></div>
+        </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}

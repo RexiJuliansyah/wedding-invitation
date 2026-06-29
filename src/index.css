@@ -2355,3 +2355,72 @@ a {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
+
+/* ============================================================
+   INTIMATE ELEGANT TITLES OVERRIDE
+   ============================================================ */
+.section-title,
+.couple-salam,
+.event-section-title,
+.livestream-title,
+.gift-title,
+.gallery-title,
+.story-title,
+.wishes-title,
+.closing-salam {
+  font-family: var(--font-serif) !important;
+  font-size: 1.6rem !important;
+  font-style: italic !important;
+  color: var(--navy) !important;
+  text-align: center;
+  margin-bottom: 32px !important;
+  letter-spacing: 1px;
+  position: relative;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.9;
+}
+
+.section-title::after,
+.couple-salam::after,
+.event-section-title::after,
+.livestream-title::after,
+.gift-title::after,
+.gallery-title::after,
+.story-title::after,
+.wishes-title::after,
+.closing-salam::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 1px;
+  background-color: var(--navy);
+  opacity: 0.5;
+  margin-top: 14px;
+}
+
+.quote-title {
+  font-family: var(--font-serif) !important;
+  font-size: 1.6rem !important;
+  font-style: italic !important;
+  color: var(--white) !important;
+  text-align: center;
+  margin-bottom: 32px !important;
+  letter-spacing: 1px;
+  position: relative;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.9;
+}
+
+.quote-title::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 1px;
+  background-color: var(--white);
+  opacity: 0.5;
+  margin-top: 14px;
+}
